@@ -392,17 +392,34 @@ var AkihabaraGamebox = {
 		this._box.style.textAlign = "center";
 		this._box.style.verticalAlign = "middle";
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+/// @kitajchuk            ///////////////////////////////////////////////////////////////////
+/// Modify canvas quality ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 		this._screen = document.createElement("canvas");
 		this._screenCtx = this._screen.getContext('2d');
+		this._devicePixelRatio = window.devicePixelRatio || 1;
+        this._backingStoreRatio = this._screenCtx.webkitBackingStorePixelRatio ||
+                                  this._screenCtx.mozBackingStorePixelRatio ||
+                                  this._screenCtx.msBackingStorePixelRatio ||
+                                  this._screenCtx.oBackingStorePixelRatio ||
+                                  this._screenCtx.backingStorePixelRatio || 1;
+
+        this._ratio = this._devicePixelRatio / this._backingStoreRatio;
 		if (this._border) { this._screen.style.border = "1px solid black"; }
-		this._screen.setAttribute('height', h);
-		this._screen.setAttribute('width', w);
-		this._screen.style.width = (w * this._zoom) + "px";
-		this._screen.style.height = (h * this._zoom) + "px";
+		this._screen.setAttribute('height', h * this._ratio);
+		this._screen.setAttribute('width', w * this._ratio);
+		this._screen.style.width = (w * this._ratio) + "px";
+		this._screen.style.height = (h * this._ratio) + "px";
 		this._screenh = h;
 		this._screenw = w;
 		this._screenhh = Math.floor(h / 2);
 		this._screenhw = Math.floor(w / 2);
+		this._screenCtx.scale( this._ratio, this._ratio );
+/////////////////////////////////////////////////////////////////////////////////////////////
+/// END: Modify canvas quality //////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 		this._camera.x = 0;
 		this._camera.y = 0;
 		this._camera.h = h;
