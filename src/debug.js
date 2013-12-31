@@ -119,17 +119,17 @@ var AkihabaraDebug = {
 					if (cnt) { statline += AkihabaraGamebox._groups[g] + "[" + cnt + "] "; }
 				}
 			}
-			cnt = 0;
-			var ply = 0;
-			for (g in AkihabaraAudio._audio.aud) {
-				for (var x = 0; x < AkihabaraAudio._audio.aud[g].length; x++) {
-					cnt++;
-					if (!AkihabaraAudio._audio.aud[g][x].paused && !AkihabaraAudio._audio.aud[g][x].ended) { ply++; }
-				}
-			}
-			statline += "| audio: " + ply + "/" + cnt + ":" + AkihabaraAudio._audioteam;
+			//cnt = 0;
+			//var ply = 0;
+			//for (g in AkihabaraAudio._audio.aud) {
+			//	for (var x = 0; x < AkihabaraAudio._audio.aud[g].length; x++) {
+			//		cnt++;
+			//		if (!AkihabaraAudio._audio.aud[g][x].paused && !AkihabaraAudio._audio.aud[g][x].ended) { ply++; }
+			//	}
+			//}
+			//statline += "| audio: " + ply + "/" + cnt + ":" + AkihabaraAudio._audioteam;
 
-			if (AkihabaraAudio._totalAudioMute) { statline += ' MUTE ON'; }
+			//if (AkihabaraAudio._totalAudioMute) { statline += ' MUTE ON'; }
 			if (AkihabaraGamebox._pauseGame) { statline += ' | PAUSE ON'; }
 
 			this.setStatBar(statline);
@@ -205,40 +205,40 @@ var AkihabaraDebug = {
 			AkihabaraGamebox.setShowPlayers(AkihabaraDebug.getURLValueFor("showplayers") === "yes");
 		}
 
-		if (AkihabaraDebug.getURLValueFor("canaudio")) {
-			AkihabaraAudio.setCanAudio(AkihabaraDebug.getURLValueFor("canaudio") === "yes");
-		}
+		//if (AkihabaraDebug.getURLValueFor("canaudio")) {
+		//	AkihabaraAudio.setCanAudio(AkihabaraDebug.getURLValueFor("canaudio") === "yes");
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("audiocompatmode")) {
-			AkihabaraAudio.setAudioCompatMode(AkihabaraDebug.getURLValueFor("audiocompatmode") * 1);
-		}
+		//if (AkihabaraDebug.getURLValueFor("audiocompatmode")) {
+		//	AkihabaraAudio.setAudioCompatMode(AkihabaraDebug.getURLValueFor("audiocompatmode") * 1);
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("audioteam")) {
-			AkihabaraAudio.setAudioTeam(AkihabaraDebug.getURLValueFor("audioteam") * 1);
-		}
+		//if (AkihabaraDebug.getURLValueFor("audioteam")) {
+		//	AkihabaraAudio.setAudioTeam(AkihabaraDebug.getURLValueFor("audioteam") * 1);
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("loweraudioteam")) {
-			AkihabaraAudio.setLowerAudioTeam(AkihabaraDebug.getURLValueFor("loweraudioteam") * 1);
-		}
+		//if (AkihabaraDebug.getURLValueFor("loweraudioteam")) {
+		//	AkihabaraAudio.setLowerAudioTeam(AkihabaraDebug.getURLValueFor("loweraudioteam") * 1);
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("audiocreatemode")) {
-			AkihabaraAudio.setAudioCreateMode(AkihabaraDebug.getURLValueFor("audiocreatemode") * 1);
-		}
+		//if (AkihabaraDebug.getURLValueFor("audiocreatemode")) {
+		//	AkihabaraAudio.setAudioCreateMode(AkihabaraDebug.getURLValueFor("audiocreatemode") * 1);
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("audiodequeuetime")) {
-			AkihabaraAudio.setAudioDequeueTime(AkihabaraDebug.getURLValueFor("audiodequeuetime") * 1);
-		}
+		//if (AkihabaraDebug.getURLValueFor("audiodequeuetime")) {
+		//	AkihabaraAudio.setAudioDequeueTime(AkihabaraDebug.getURLValueFor("audiodequeuetime") * 1);
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("audiopositiondelay")) {
-			AkihabaraAudio.setAudioPositionDelay(AkihabaraDebug.getURLValueFor("audiopositiondelay") * 1);
-		}
+		//if (AkihabaraDebug.getURLValueFor("audiopositiondelay")) {
+		//	AkihabaraAudio.setAudioPositionDelay(AkihabaraDebug.getURLValueFor("audiopositiondelay") * 1);
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("forcedmimeaudio")) {
-			AkihabaraAudio.setForcedMimeAudio(AkihabaraDebug.getURLValueFor("forcedmimeaudio"));
-		}
+		//if (AkihabaraDebug.getURLValueFor("forcedmimeaudio")) {
+		//	AkihabaraAudio.setForcedMimeAudio(AkihabaraDebug.getURLValueFor("forcedmimeaudio"));
+		//}
 
-		if (AkihabaraDebug.getURLValueFor("audioissinglechannel")) {
-			AkihabaraAudio.setAudioIsSingleChannel(AkihabaraDebug.getURLValueFor("audioissinglechannel") === "yes");
-		}
+		//if (AkihabaraDebug.getURLValueFor("audioissinglechannel")) {
+		//	AkihabaraAudio.setAudioIsSingleChannel(AkihabaraDebug.getURLValueFor("audioissinglechannel") === "yes");
+		//}
 	}
 };

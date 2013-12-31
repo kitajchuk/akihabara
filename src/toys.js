@@ -76,7 +76,7 @@ var AkihabaraToys = {
 					if (th.toys[id].time) {
 						th.toys[id].time--;
 						if (data.audiocritical && (th.toys[id].time <= data.critical)) {
-							AkihabaraAudio.hitAudio(data.audiocritical);
+							//AkihabaraAudio.hitAudio(data.audiocritical);
 						}
 					} else {
 						th.toys[id].done = true;
@@ -147,15 +147,15 @@ var AkihabaraToys = {
 			}
 			if (!th.toys[id].ok) {
 				if (AkihabaraInput.keyIsHit(opt.keys.up) && (th.toys[id].selected > 0)) {
-					if (opt.audiooption) { AkihabaraAudio.hitAudio(opt.audiooption); }
+					//if (opt.audiooption) { AkihabaraAudio.hitAudio(opt.audiooption); }
 					th.toys[id].selected--;
 				} else {
 					if (AkihabaraInput.keyIsHit(opt.keys.down) && (th.toys[id].selected < opt.items.length - 1)) {
-						if (opt.audiooption) { AkihabaraAudio.hitAudio(opt.audiooption); }
+						//if (opt.audiooption) { AkihabaraAudio.hitAudio(opt.audiooption); }
 						th.toys[id].selected++;
 					} else {
 						if (AkihabaraInput.keyIsHit(opt.keys.ok)) {
-							if (opt.audioconfirm) { AkihabaraAudio.hitAudio(opt.audioconfirm); }
+							//if (opt.audioconfirm) { AkihabaraAudio.hitAudio(opt.audioconfirm); }
 							th.toys[id].ok = 1;
 						} else {
 							if (AkihabaraInput.keyIsHit(opt.keys.cancel)) { th.toys[id].ok = -1; }
@@ -324,36 +324,36 @@ var AkihabaraToys = {
 		fadeout: function (th, id, tox, data) {
 			if (AkihabaraToys._maketoy(th, id) || data.resetfade) {
 				th.toys[id].fade = 0;
-				if (data.audiofade) { th.toys[id].stv = AkihabaraAudio.getAudioVolume(data.audiofade); }
-				if (data.audiochannelfade) { th.toys[id].chv = AkihabaraAudio.getChannelVolume(data.audiochannelfade); }
+				//if (data.audiofade) { th.toys[id].stv = AkihabaraAudio.getAudioVolume(data.audiofade); }
+				//if (data.audiochannelfade) { th.toys[id].chv = AkihabaraAudio.getChannelVolume(data.audiochannelfade); }
 			}
 			th.toys[id].fade += data.fadespeed;
 			if (th.toys[id].fade > 1) { th.toys[id].fade = 1; }
 			data.alpha = th.toys[id].fade;
 			AkihabaraGamebox.blitFade(tox, data);
-			if (data.audiofade) { AkihabaraAudio.setAudioVolume(data.audiofade, th.toys[id].stv * (1 - data.alpha)); }
-			if (data.audiochannelfade) {
-				if (data.alpha === 1) {
-					AkihabaraAudio.stopChannel(data.audiochannelfade);
-				} else {
-					AkihabaraAudio.setChannelVolume(data.audiochannelfade, th.toys[id].chv * (1 - data.alpha));
-				}
-			}
+			//if (data.audiofade) { AkihabaraAudio.setAudioVolume(data.audiofade, th.toys[id].stv * (1 - data.alpha)); }
+			//if (data.audiochannelfade) {
+			//	if (data.alpha === 1) {
+			//		AkihabaraAudio.stopChannel(data.audiochannelfade);
+			//	} else {
+			//		AkihabaraAudio.setChannelVolume(data.audiochannelfade, th.toys[id].chv * (1 - data.alpha));
+			//	}
+			//}
 			return AkihabaraToys._toyfrombool(th, id, th.toys[id].fade === 1);
 		},
 
 		fadein: function (th, id, tox, data) {
 			if (AkihabaraToys._maketoy(th, id) || data.resetfade) {
 				th.toys[id].fade = 1;
-				if (data.audiofade) { th.toys[id].stv = AkihabaraAudio.getAudioVolume(data.audiofade); }
-				if (data.audiochannelfade) { th.toys[id].chv = AkihabaraAudio.getChannelDefaultVolume(data.audiochannelfade); }
+				//if (data.audiofade) { th.toys[id].stv = AkihabaraAudio.getAudioVolume(data.audiofade); }
+				//if (data.audiochannelfade) { th.toys[id].chv = AkihabaraAudio.getChannelDefaultVolume(data.audiochannelfade); }
 			}
 			th.toys[id].fade -= data.fadespeed;
 			if (th.toys[id].fade < 0) { th.toys[id].fade = 0; }
 			if (th.toys[id].fade) {
 				data.alpha = th.toys[id].fade;
-				if (data.audiofade) { AkihabaraAudio.setAudioVolume(data.audiofade, th.toys[id].stv * (1 - data.alpha)); }
-				if (data.audiochannelfade) { AkihabaraAudio.setChannelVolume(data.audiochannelfade, th.toys[id].chv * (1 - data.alpha)); }
+				//if (data.audiofade) { AkihabaraAudio.setAudioVolume(data.audiofade, th.toys[id].stv * (1 - data.alpha)); }
+				//if (data.audiochannelfade) { AkihabaraAudio.setChannelVolume(data.audiochannelfade, th.toys[id].chv * (1 - data.alpha)); }
 				AkihabaraGamebox.blitFade(tox, data);
 			}
 			return AkihabaraToys._toyfrombool(th, id, th.toys[id].fade === 0);
@@ -411,7 +411,7 @@ var AkihabaraToys = {
 					}
 				} else {
 					if (!th.toys[id].played) {
-						if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
+						//if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
 						th.toys[id].played = true;
 					}
 				}
@@ -452,7 +452,7 @@ var AkihabaraToys = {
 			} else {
 				if (!th.toys[id].done) {
 					th.toys[id].done = true;
-					if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
+					//if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
 				}
 				AkihabaraGamebox.blitAll(AkihabaraGamebox.getBufferContext(), AkihabaraGamebox.getImage(data.image), {dx: data.x, dy: data.y});
 				return AkihabaraToys._toydone(th, id);
@@ -469,7 +469,7 @@ var AkihabaraToys = {
 				th.toys[id].zoom -= data.speed;
 				if (th.toys[id].zoom <= 1) {
 					th.toys[id].zoom = 1;
-					if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
+					//if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
 				}
 				AkihabaraGamebox.blit(AkihabaraGamebox.getBufferContext(), AkihabaraGamebox.getImage(data.image), {h: th.toys[id].img.height, w: th.toys[id].img.width, dx: data.x - Math.floor(th.toys[id].img.width * (th.toys[id].zoom - 1) / 2), dy: data.y - Math.floor(th.toys[id].img.height * (th.toys[id].zoom - 1) / 2), dh: Math.floor(th.toys[id].img.height * th.toys[id].zoom), dw: Math.floor(th.toys[id].img.width * th.toys[id].zoom), alpha: 1 / th.toys[id].zoom});
 				return AkihabaraToys._toybusy(th, id);
@@ -494,7 +494,7 @@ var AkihabaraToys = {
 					AkihabaraGamebox.blit(AkihabaraGamebox.getBufferContext(), AkihabaraGamebox.getImage(data.image), {dh: th.toys[id].cnt, dw: th.toys[id].lw, dx: data.x, dy: data.y + th.toys[id].lh, alpha: data.reflex, flipv: true});
 				}
 				if (th.toys[id].cnt >= th.toys[id].lh) {
-					if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
+					//if (data.audioreach) { AkihabaraAudio.hitAudio(data.audioreach); }
 				}
 				return AkihabaraToys._toybusy(th, id);
 			} else {
@@ -516,7 +516,7 @@ var AkihabaraToys = {
 			}
 			if (!th.toys[id].done) {
 				if (th.toys[id].y + th.toys[id].h >= data.floory) {
-					if (data.audiobounce) { AkihabaraAudio.hitAudio(data.audiobounce); }
+					//if (data.audiobounce) { AkihabaraAudio.hitAudio(data.audiobounce); }
 					th.toys[id].y = data.floory - th.toys[id].h;
 					th.toys[id].accy = -Math.ceil(th.toys[id].accy / (data.heavy ? data.heavy : 2));
 					th.toys[id].done = (th.toys[id].accy === 0);
@@ -580,7 +580,7 @@ var AkihabaraToys = {
 						if (th.toys[id].scene.bonus) {
 							AkihabaraGamebox.createCanvas("bonus-" + id, {w: th.toys[id].sceneW, h: (th.toys[id].scene.bonus.length) * (th.toys[id].fd.tileh + th.toys[id].scene.spacing)});
 						}
-						if (th.toys[id].scene.audiomusic) { AkihabaraAudio.hitAudio(th.toys[id].scene.audiomusic); }
+						//if (th.toys[id].scene.audiomusic) { AkihabaraAudio.hitAudio(th.toys[id].scene.audiomusic); }
 					}
 				}
 				if (!th.toys[id].ended) {
@@ -611,7 +611,7 @@ var AkihabaraToys = {
 							if (th.toys[id].counter === th.toys[id].scene.speed) {
 								th.toys[id].letter++;
 								th.toys[id].counter = 0;
-								if (th.toys[id].scene.audio && (th.toys[id].letter % 3 === 0)) { AkihabaraAudio.hitAudio(th.toys[id].scene.audio); }
+								//if (th.toys[id].scene.audio && (th.toys[id].letter % 3 === 0)) { AkihabaraAudio.hitAudio(th.toys[id].scene.audio); }
 								var tmp = th.toys[id].letter;
 								var row = 0;
 								while (tmp > th.toys[id].scene.talk[row].length) {

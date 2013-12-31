@@ -169,39 +169,39 @@ var Akihabara = {
 
 		if (!data || !data.hardwareonly) { AkihabaraGamebox.initScreen(screenwidth, screenheight); }
 
-		AkihabaraAudio.setCanAudio(device.canaudio && (!device.audioisexperimental || AkihabaraGamebox.getFlag("experimental")));
+		//AkihabaraAudio.setCanAudio(device.canaudio && (!device.audioisexperimental || AkihabaraGamebox.getFlag("experimental")));
 
-		if (device.audiocompatmode) {
-			AkihabaraAudio.setAudioCompatMode(device.audiocompatmode);
-		}
+		//if (device.audiocompatmode) {
+		//	AkihabaraAudio.setAudioCompatMode(device.audiocompatmode);
+		//}
 
-		if (device.audioteam) {
-			AkihabaraAudio.setAudioTeam(device.audioteam);
-		}
+		//if (device.audioteam) {
+		//	AkihabaraAudio.setAudioTeam(device.audioteam);
+		//}
 
-		if (device.loweraudioteam) {
-			AkihabaraAudio.setLowerAudioTeam(device.loweraudioteam);
-		}
+		//if (device.loweraudioteam) {
+		//	AkihabaraAudio.setLowerAudioTeam(device.loweraudioteam);
+		//}
 
-		if (device.audiocreatemode) {
-			AkihabaraAudio.setAudioCreateMode(device.audiocreatemode);
-		}
+		//if (device.audiocreatemode) {
+		//	AkihabaraAudio.setAudioCreateMode(device.audiocreatemode);
+		//}
 
-		if (device.audiodequeuetime) {
-			AkihabaraAudio.setAudioDequeueTime(device.audiodequeuetime);
-		}
+		//if (device.audiodequeuetime) {
+		//	AkihabaraAudio.setAudioDequeueTime(device.audiodequeuetime);
+		//}
 
-		if (device.audiopositiondelay) {
-			AkihabaraAudio.setAudioPositionDelay(device.audiopositiondelay);
-		}
+		//if (device.audiopositiondelay) {
+		//	AkihabaraAudio.setAudioPositionDelay(device.audiopositiondelay);
+		//}
 
-		if (device.forcedmimeaudio) {
-			AkihabaraAudio.setForcedMimeAudio(device.forcedmimeaudio);
-		}
+		//if (device.forcedmimeaudio) {
+		//	AkihabaraAudio.setForcedMimeAudio(device.forcedmimeaudio);
+		//}
 
-		if (device.audioissinglechannel) {
-			AkihabaraAudio.setAudioIsSingleChannel(device.audioissinglechannel);
-		}
+		//if (device.audioissinglechannel) {
+		//	AkihabaraAudio.setAudioIsSingleChannel(device.audioissinglechannel);
+		//}
 
 		if (!data || !data.hardwareonly) {
 			if (AkihabaraDebug.getURLValueFor("touch") !== "no" && (AkihabaraDebug.getURLValueFor("touch") === "yes" || device.touch)) {

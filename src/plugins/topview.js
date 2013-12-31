@@ -481,7 +481,7 @@ var AkihabaraTopview = {
 		th.touchedfloor = false;
 		if (th.z > 0) {
 			th.accz = (data == null ? 0 : -Math.floor(th.accz / data.bounce));
-			if (data && data.audiobounce && th.accz) { AkihabaraAudio.hitAudio(data.audiobounce); }
+			//if (data && data.audiobounce && th.accz) { AkihabaraAudio.hitAudio(data.audiobounce); }
 			th.z = 0;
 			th.touchedfloor = true;
 		}
@@ -707,13 +707,13 @@ var AkihabaraTopview = {
 		obj[(data.logicon == null ? "first" : data.logicon)] = function () {
 			if (this.closing) {
 				if (!this.ismoving) {
-					if (this.audiobefore) { AkihabaraAudio.hitAudio(this.audiobefore); }
+					//if (this.audiobefore) { AkihabaraAudio.hitAudio(this.audiobefore); }
 					this.ismoving = true;
 				}
 				this.whileMoving();
 				this.opencounter--;
 				if (this.opencounter < 0) {
-					if (this.audioafter) { AkihabaraAudio.hitAudio(this.audioafter); }
+					//if (this.audioafter) { AkihabaraAudio.hitAudio(this.audioafter); }
 					this.ismoving = false;
 					this.opencounter = 0;
 					this.closing = false;
@@ -722,13 +722,13 @@ var AkihabaraTopview = {
 			}
 			if (this.opening) {
 				if (!this.ismoving) {
-					if (this.audiobefore) { AkihabaraAudio.hitAudio(this.audiobefore); }
+					//if (this.audiobefore) { AkihabaraAudio.hitAudio(this.audiobefore); }
 					this.ismoving = true;
 				}
 				this.whileMoving();
 				this.opencounter++;
 				if (this.opencounter >= this.doorheight) {
-					if (this.audioafter) { AkihabaraAudio.hitAudio(this.audioafter); }
+					//if (this.audioafter) { AkihabaraAudio.hitAudio(this.audioafter); }
 					this.ismoving = false;
 					if (!this.whenOpened()) { AkihabaraGamebox.trashObject(this); }
 				}

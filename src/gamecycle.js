@@ -44,7 +44,7 @@ var AkihabaraGamecycle = {
 			// game intro animation
 			gameIntroAnimation: function (reset) {
 				if (reset) {
-					AkihabaraAudio.stopChannel("bgmusic");
+					//AkihabaraAudio.stopChannel("bgmusic");
 					AkihabaraToys.resetToy(this, "default-blinker");
 				} else {
 					AkihabaraGamebox.blitFade(AkihabaraGamebox.getBufferContext(), {alpha: 1});
@@ -55,7 +55,7 @@ var AkihabaraGamecycle = {
 			// level intro animation
 			levelIntroAnimation: function (reset) {
 				if (reset) {
-					AkihabaraAudio.stopChannel("bgmusic");
+					//AkihabaraAudio.stopChannel("bgmusic");
 					AkihabaraToys.resetToy(this, "default-blinker");
 				} else {
 					AkihabaraGamebox.blitFade(AkihabaraGamebox.getBufferContext(), {alpha: 1});
@@ -66,7 +66,7 @@ var AkihabaraGamecycle = {
 			// Life intro animation
 			newlifeIntroAnimation: function (reset) {
 				if (reset) {
-					AkihabaraAudio.stopChannel("bgmusic");
+					//AkihabaraAudio.stopChannel("bgmusic");
 					AkihabaraToys.resetToy(this, "default-blinker");
 				} else {
 					AkihabaraGamebox.blitFade(AkihabaraGamebox.getBufferContext(), {alpha: 1});
@@ -77,7 +77,7 @@ var AkihabaraGamecycle = {
 			// gameover animation
 			gameoverIntroAnimation: function (reset) {
 				if (reset) {
-					AkihabaraAudio.stopChannel("bgmusic");
+					//AkihabaraAudio.stopChannel("bgmusic");
 					AkihabaraToys.resetToy(this, "default-blinker");
 				} else {
 					AkihabaraGamebox.blitFade(AkihabaraGamebox.getBufferContext(), {alpha: 1});
@@ -88,7 +88,7 @@ var AkihabaraGamecycle = {
 			// game title animation
 			gameTitleIntroAnimation: function (reset) {
 				if (reset) {
-					AkihabaraAudio.stopChannel("bgmusic");
+					//AkihabaraAudio.stopChannel("bgmusic");
 				} else {
 					AkihabaraGamebox.blitFade(AkihabaraGamebox.getBufferContext(), {alpha: 1});
 					AkihabaraGamebox.blitText(AkihabaraGamebox.getBufferContext(), {font: "small", text: "GAME TITLE", valign: AkihabaraGamebox.ALIGN_MIDDLE, halign: AkihabaraGamebox.ALIGN_CENTER, dx: 0, dy: 0, dw: AkihabaraGamebox.getScreenW(), dh: AkihabaraGamebox.getScreenH() - 100});
@@ -231,7 +231,7 @@ var AkihabaraGamecycle = {
 					switch (this.state) {
 					case 100: // Press to start
 						if (this.stateFirstIteration) {
-							AkihabaraAudio.resetChannel("bgmusic");
+							//AkihabaraAudio.resetChannel("bgmusic");
 							this.pressStartIntroAnimation(true);
 							this.stateIsReady();
 						}
@@ -239,7 +239,7 @@ var AkihabaraGamecycle = {
 						break;
 					case 101: // Game menu
 						if (this.stateFirstIteration) {
-							AkihabaraAudio.setChannelVolume("bgmusic", 0.5);
+							//AkihabaraAudio.setChannelVolume("bgmusic", 0.5);
 							this.gameMenu(true);
 							this.stateIsReady();
 						}
@@ -334,12 +334,12 @@ var AkihabaraGamecycle = {
 							AkihabaraGamebox.playAllGroups();
 							break;
 						case 700:
-							AkihabaraAudio.resetChannel("bgmusic");
+							//AkihabaraAudio.resetChannel("bgmusic");
 							AkihabaraGamebox.soloGroup(this.group);
 							this.gameoverIntroAnimation(true);
 							break;
 						case 801:
-							AkihabaraAudio.resetChannel("bgmusic");
+							//AkihabaraAudio.resetChannel("bgmusic");
 							AkihabaraGamebox.soloGroup(this.group);
 							this.gameEndingIntroAnimation(true);
 							break;

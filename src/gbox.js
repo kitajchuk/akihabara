@@ -439,7 +439,7 @@ var AkihabaraGamebox = {
 		AkihabaraGamebox._sessioncache = d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear() + "-" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds();
 
 		AkihabaraGamebox._loadsettings(); // Load default configuration
-		AkihabaraAudio.setCanAudio(true); // Tries to enable audio by default
+		//AkihabaraAudio.setCanAudio(true); // Tries to enable audio by default
 
 		switch (AkihabaraGamebox._flags.fse) { // Initialize FSEs
 		case "scanlines":
@@ -1541,9 +1541,9 @@ var AkihabaraGamebox = {
 		if (pack.addImage) {
 			for (i = 0; i < pack.addImage.length; i++) { AkihabaraGamebox.addImage(pack.addImage[i][0], pack.addImage[i][1]); }
 		}
-		if (pack.addAudio) {
-			for (i = 0; i < pack.addAudio.length; i++) { AkihabaraAudio.addAudio(pack.addAudio[i][0], pack.addAudio[i][1], pack.addAudio[i][2]); }
-		}
+		//if (pack.addAudio) {
+		//	for (i = 0; i < pack.addAudio.length; i++) { AkihabaraAudio.addAudio(pack.addAudio[i][0], pack.addAudio[i][1], pack.addAudio[i][2]); }
+		//}
 		if (pack.addBundle) {
 			for (i = 0; i < pack.addBundle.length; i++) { AkihabaraGamebox.addBundle(pack.addBundle[i]); }
 		}
@@ -1642,9 +1642,9 @@ var AkihabaraGamebox = {
 					} else { AkihabaraGamebox._xmlhttp.send(); }
 				}
 				break;
-			case "audio":
-				AkihabaraAudio._createnextaudio(current.data);
-				break;
+			//case "audio":
+			//	AkihabaraAudio._createnextaudio(current.data);
+			//	break;
 			case "exec-onl":
 				current.func(current.call, current.pack);
 				AkihabaraGamebox._loaderloaded();

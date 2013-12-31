@@ -57,15 +57,15 @@ var AkihabaraInput = {
 		AkihabaraInput._keyboard[key] = -1;
 		//Check for global action keys
 		if (e.keyCode === AkihabaraInput._keymap.pause) { AkihabaraGamebox.pauseGame(); }
-		if (e.keyCode === AkihabaraInput._keymap.mute) {
-			if (!AkihabaraAudio._totalAudioMute) {
-				AkihabaraAudio.totalAudioMute();
-				AkihabaraAudio._totalAudioMute = true;
-			} else {
-				AkihabaraAudio.totalAudioUnmute();
-				AkihabaraAudio._totalAudioMute = false;
-			}
-		}
+		//if (e.keyCode === AkihabaraInput._keymap.mute) {
+		//	if (!AkihabaraAudio._totalAudioMute) {
+		//		AkihabaraAudio.totalAudioMute();
+		//		AkihabaraAudio._totalAudioMute = true;
+		//	} else {
+		//		AkihabaraAudio.totalAudioUnmute();
+		//		AkihabaraAudio._totalAudioMute = false;
+		//	}
+		//}
 	},
 
 	/**
