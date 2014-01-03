@@ -652,6 +652,102 @@ var AkihabaraTopview = {
 
 		return obj;
 	},
+	
+	strikeWeapon: function ( gr, id, data ) {
+    	var ts = AkihabaraGamebox.getTiles(data.tileset);
+    	var obj = AkihabaraGamebox.addObject(
+    		Akihabara.extendsFrom({
+    			_bullet: true,
+    			zindex: 0,
+    			fliph: false,
+    			flipv: false,
+    			id: id,
+    			group: gr,
+    			cnt: 0,
+    			tileset: "",
+    			frames: {},
+    			acc: 0,
+    			angle: 0,
+    			camera: data.from.camera,
+    			accx: 0,
+    			accy: 0,
+    			accz: 0,
+    			x: data.sidex,
+    			y: data.sidey,
+    			z: (data.from.z == null ? 0 : data.from.z),
+    			collidegroup: "",
+    			spark: AkihabaraTopview.NOOP,
+    			power: 1,
+    			lifetime: null,
+    			tilemap: null,
+    			defaulttile: 0,
+    			applyzgravity: false,
+    			map: null,
+    			mapindex: "",
+    			spritewalls: null,
+    			colx: (data.fullhit ? 0 : null),
+    			coly: (data.fullhit ? 0 : null),
+    			colh: (data.fullhit ? ts.tileh : null),
+    			colw: (data.fullhit ? ts.tilew : null),
+    			duration: null,
+    			onWallHit: function () {
+    				this.spark(this);
+    				AkihabaraGamebox.trashObject(this);
+    			},
+    			bulletIsAlive: function () {
+    				return AkihabaraGamebox.objectIsVisible(this);
+    			}
+    		}, data)
+    	);
+    
+    	obj.initialize = function () {
+    		AkihabaraTopview.initialize(this);
+    	};
+    
+    	obj[(data.logicon == null ? "first" : data.logicon)] = function () {
+    		this.cnt = (this.cnt + 1) % 10;
+    
+    		if (this.applyzgravity) { AkihabaraTopview.handleGravity(this); } // z-gravity
+    		AkihabaraTopview.applyForces(this); // Apply forces
+    		if (this.applyzgravity) { AkihabaraTopview.applyGravity(this); }// z-gravity
+    		if (this.map != null) { AkihabaraTopview.tileCollision(this, this.map, this.mapindex, this.defaulttile); } // tile collisions
+    		if (this.spritewalls != null) { AkihabaraTopview.spritewallCollision(this, {group: this.spritewalls}); } // walls collisions
+    		if (this.applyzgravity) { AkihabaraTopview.floorCollision(this); } // Collision with the floor (for z-gravity)
+    		AkihabaraTopview.adjustZindex(this);
+    		if (this.duration != null) {
+    			this.duration--;
+    			if (this.duration === 0) { AkihabaraGamebox.trashObject(this); }
+    		}
+    		if (!this.bulletIsAlive()) {
+    			AkihabaraGamebox.trashObject(this);
+    		} else if (this.toucheddown || this.touchedup || this.touchedleft || this.touchedright) {
+    			this.onWallHit();
+    		} else if (this.collidegroup != null) {
+    			for (var i in AkihabaraGamebox._objects[this.collidegroup]) {
+    				if ((!AkihabaraGamebox._objects[this.collidegroup][i].initialize) && AkihabaraTopview.collides(this, AkihabaraGamebox._objects[this.collidegroup][i], AkihabaraGamebox._objects[this.collidegroup][i].tolerance)) {
+    					if (AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet != null) {
+    						if (!AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet(this)) {
+    							this.spark(this);
+    							AkihabaraGamebox.trashObject(this);
+    						}
+    					}
+    				}
+    			}
+    		}
+    	};
+    
+    	obj[(data.bliton == null ? "blit" : data.bliton)] = function () {
+    		if (!AkihabaraGamebox.objectIsTrash(this)) {
+    			AkihabaraGamebox.blitTile(AkihabaraGamebox.getBufferContext(), {tileset: this.tileset, tile: AkihabaraGamebox.decideFrame(this.cnt, this.frames), dx: this.x, dy: this.y + this.z, camera: this.camera, fliph: this.fliph, flipv: this.flipv});
+    		} else {
+    			data.cb.call( data.from );
+    		}
+    	};
+    
+    	AkihabaraGamebox.setZindex(obj, obj.y + obj.h);
+    
+    	return obj;
+	},
 
 	makedoor: function (gr, id, map, data) {
 		var mts = AkihabaraGamebox.getTiles(map.tileset);
