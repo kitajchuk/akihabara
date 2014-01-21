@@ -1648,7 +1648,7 @@ var AkihabaraGamebox = {
 		var dw = 0, dh = 0;
 		if (AkihabaraGamebox._loaderqueue.isBusy() || (AkihabaraGamebox._minimalexpired !== 2)) {
 			AkihabaraGamebox._screenCtx.save();
-			AkihabaraGamebox.blitFade(AkihabaraGamebox._screenCtx, {alpha: 1});
+			//AkihabaraGamebox.blitFade(AkihabaraGamebox._screenCtx, {alpha: 1});
 			if (!AkihabaraGamebox._minimalexpired && AkihabaraGamebox._splashscreeniscompleted()) {
 				AkihabaraGamebox._minimalexpired = 1;
 				setTimeout(AkihabaraGamebox._minimaltimeexpired, AkihabaraGamebox._splash.minimalTime);
@@ -1659,8 +1659,8 @@ var AkihabaraGamebox = {
 				while (p !== AkihabaraGamebox.getScreenH()) {
 					l = 10 + Math.floor(Math.random() * AkihabaraGamebox.getScreenH() / 4);
 					if (p + l > AkihabaraGamebox.getScreenH()) { l = AkihabaraGamebox.getScreenH() - p; }
-					AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox.PALETTES.c64.colors[AkihabaraGamebox.PALETTES.c64.order[Math.floor(Math.random() * AkihabaraGamebox.PALETTES.c64.order.length)]];
-					AkihabaraGamebox._screenCtx.fillRect(0, p, AkihabaraGamebox.getScreenW(), l);
+					//AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox.PALETTES.c64.colors[AkihabaraGamebox.PALETTES.c64.order[Math.floor(Math.random() * AkihabaraGamebox.PALETTES.c64.order.length)]];
+					//AkihabaraGamebox._screenCtx.fillRect(0, p, AkihabaraGamebox.getScreenW(), l);
 					p += l;
 				}
 				AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox.PALETTES.c64.colors.lightblue;
@@ -1668,41 +1668,41 @@ var AkihabaraGamebox = {
 				if (AkihabaraGamebox._splash.minilogo && AkihabaraGamebox.imageIsLoaded("logo")) {
 					dw = AkihabaraGamebox.getScreenW() / 4;
 					dh = (AkihabaraGamebox.getImage("logo").height * dw) / AkihabaraGamebox.getImage("logo").width;
-					AkihabaraGamebox.blit(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getImage(AkihabaraGamebox._splash.minilogo), {w: AkihabaraGamebox.getImage("logo").width, h: AkihabaraGamebox.getImage("logo").height, dx: (AkihabaraGamebox.getScreenW() - dw) / 2, dy: (AkihabaraGamebox.getScreenH() - dh) / 2, dw: dw, dh: dh});
+					//AkihabaraGamebox.blit(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getImage(AkihabaraGamebox._splash.minilogo), {w: AkihabaraGamebox.getImage("logo").width, h: AkihabaraGamebox.getImage("logo").height, dx: (AkihabaraGamebox.getScreenW() - dw) / 2, dy: (AkihabaraGamebox.getScreenH() - dh) / 2, dw: dw, dh: dh});
 				}
 			} else {
 				if (AkihabaraGamebox._splash.background && AkihabaraGamebox.imageIsLoaded("_splash")) {
-					AkihabaraGamebox.blit(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getImage("_splash"), {w: AkihabaraGamebox.getImage("_splash").width, h: AkihabaraGamebox.getImage("_splash").height, dx: 0, dy: 0, dw: AkihabaraGamebox.getScreenW(), dh: AkihabaraGamebox.getScreenH()});
+					//AkihabaraGamebox.blit(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getImage("_splash"), {w: AkihabaraGamebox.getImage("_splash").width, h: AkihabaraGamebox.getImage("_splash").height, dx: 0, dy: 0, dw: AkihabaraGamebox.getScreenW(), dh: AkihabaraGamebox.getScreenH()});
 				}
 				if (AkihabaraGamebox._splash.minilogo && AkihabaraGamebox.imageIsLoaded("logo")) {
 					dw = AkihabaraGamebox.getScreenW() / 4;
 					dh = (AkihabaraGamebox.getImage("logo").height * dw) / AkihabaraGamebox.getImage("logo").width;
-					AkihabaraGamebox.blit(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getImage(AkihabaraGamebox._splash.minilogo), {w: AkihabaraGamebox.getImage("logo").width, h: AkihabaraGamebox.getImage("logo").height, dx: AkihabaraGamebox.getScreenW() - dw - 5, dy: AkihabaraGamebox.getScreenH() - dh - 5, dw: dw, dh: dh});
+					//AkihabaraGamebox.blit(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getImage(AkihabaraGamebox._splash.minilogo), {w: AkihabaraGamebox.getImage("logo").width, h: AkihabaraGamebox.getImage("logo").height, dx: AkihabaraGamebox.getScreenW() - dw - 5, dy: AkihabaraGamebox.getScreenH() - dh - 5, dw: dw, dh: dh});
 				}
 				if (AkihabaraGamebox._splash.footnotes && AkihabaraGamebox.imageIsLoaded("_dbf")) {
 					if (!AkihabaraGamebox.getCanvas("_footnotes")) {
 						var fd = AkihabaraGamebox.getFont("_dbf");
 						AkihabaraGamebox.createCanvas("_footnotes", {w: AkihabaraGamebox.getScreenW() - 5, h: (AkihabaraGamebox._splash.footnotes.length) * (fd.tileh + AkihabaraGamebox._splash.footnotesSpacing)});
 						for (var i = 0; i < AkihabaraGamebox._splash.footnotes.length; i++) {
-							AkihabaraGamebox.blitText(AkihabaraGamebox.getCanvasContext("_footnotes"), {
-								font: "_dbf",
-								dx: 0,
-								dy: i * (fd.tileh + AkihabaraGamebox._splash.footnotesSpacing),
-								text: AkihabaraGamebox._splash.footnotes[i]
-							});
+							//AkihabaraGamebox.blitText(AkihabaraGamebox.getCanvasContext("_footnotes"), {
+							//	font: "_dbf",
+							//	dx: 0,
+							//	dy: i * (fd.tileh + AkihabaraGamebox._splash.footnotesSpacing),
+							//	text: AkihabaraGamebox._splash.footnotes[i]
+							//});
 						}
 					}
 					AkihabaraGamebox.blitAll(AkihabaraGamebox._screenCtx, AkihabaraGamebox.getCanvas("_footnotes"), {dx: 5, dy: AkihabaraGamebox.getScreenH() - AkihabaraGamebox.getCanvas("_footnotes").height - 5});
 				}
 				if (AkihabaraGamebox._loaderqueue.isBusy()) {
 					var bw = Math.floor(((AkihabaraGamebox.getScreenW() - 4) * AkihabaraGamebox._loaderqueue.getDone()) / AkihabaraGamebox._loaderqueue.getTotal());
-					AkihabaraGamebox._screenCtx.globalAlpha = 1;
-					AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox._splash.gaugeBorderColor;
-					AkihabaraGamebox._screenCtx.fillRect(0, Math.floor((AkihabaraGamebox.getScreenH() - AkihabaraGamebox._splash.gaugeHeight) / 2), AkihabaraGamebox.getScreenW(), AkihabaraGamebox._splash.gaugeHeight);
-					AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox._splash.gaugeBackColor;
-					AkihabaraGamebox._screenCtx.fillRect(1, Math.floor(((AkihabaraGamebox.getScreenH() - AkihabaraGamebox._splash.gaugeHeight) / 2) + 1), AkihabaraGamebox.getScreenW() - 4, AkihabaraGamebox._splash.gaugeHeight - 2);
-					AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox._splash.gaugeColor;
-					AkihabaraGamebox._screenCtx.fillRect(1, Math.floor(((AkihabaraGamebox.getScreenH() - AkihabaraGamebox._splash.gaugeHeight) / 2) + 1), (bw > 0 ? bw : 0), AkihabaraGamebox._splash.gaugeHeight - 2);
+					//AkihabaraGamebox._screenCtx.globalAlpha = 1;
+					//AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox._splash.gaugeBorderColor;
+					//AkihabaraGamebox._screenCtx.fillRect(0, Math.floor((AkihabaraGamebox.getScreenH() - AkihabaraGamebox._splash.gaugeHeight) / 2), AkihabaraGamebox.getScreenW(), AkihabaraGamebox._splash.gaugeHeight);
+					//AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox._splash.gaugeBackColor;
+					//AkihabaraGamebox._screenCtx.fillRect(1, Math.floor(((AkihabaraGamebox.getScreenH() - AkihabaraGamebox._splash.gaugeHeight) / 2) + 1), AkihabaraGamebox.getScreenW() - 4, AkihabaraGamebox._splash.gaugeHeight - 2);
+					//AkihabaraGamebox._screenCtx.fillStyle = AkihabaraGamebox._splash.gaugeColor;
+					//AkihabaraGamebox._screenCtx.fillRect(1, Math.floor(((AkihabaraGamebox.getScreenH() - AkihabaraGamebox._splash.gaugeHeight) / 2) + 1), (bw > 0 ? bw : 0), AkihabaraGamebox._splash.gaugeHeight - 2);
 				}
 			}
 			AkihabaraGamebox._screenCtx.restore();
