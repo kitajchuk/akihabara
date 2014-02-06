@@ -728,7 +728,7 @@ var AkihabaraTopview = {
     					if (AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet != null) {
     						if (!AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet(this)) {
     							this.spark(this);
-    							AkihabaraGamebox.trashObject(this);
+    							//AkihabaraGamebox.trashObject(this);
     						}
     					}
     				}
