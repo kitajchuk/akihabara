@@ -1,0 +1,45 @@
+{
+    "name": "akihabara",
+    "description": "A retro gaming engine using Javascript Canvas.",
+    "version": "2.0.0",
+    "homepage": "https://github.com/kitajchuk/akihabara",
+    "readmeFilename": "README.md",
+    "author": {
+        "name": "Brandon Kitajchuk",
+        "email": "kitajchuk@gmail.com",
+        "url": "http://github.com/kitajchuk"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/kitajchuk/akihabara.git"
+    },
+    "bugs": {
+        "url": "https://github.com/kitajchuk/akihabara/issues"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/kitajchuk/akihabara/blob/master/LICENSE-MIT"
+        }
+    ],
+    "main": "Gruntfile.js",
+    "dependencies": {
+        "jsource": "~0.1"
+    },
+    "devDependencies": {
+        "grunt": "~0.4",
+        "grunt-contrib-jshint": "~0.7",
+        "grunt-contrib-concat": "~0.3",
+        "grunt-contrib-uglify": "~0.2",
+        "grunt-contrib-watch": "~0.5",
+        "grunt-contrib-clean": "~0.5"
+    },
+    "keywords": [
+        "akihabara",
+        "canvas",
+        "html5",
+        "javascript",
+        "gaming",
+        "8bit"
+    ]
+}

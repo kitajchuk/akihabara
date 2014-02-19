@@ -5,17 +5,17 @@
 * @namespace
 **/
 var AkihabaraInterface = {
-	Audio: AkihabaraAudio,
-	Gamecycle: AkihabaraGamecycle,
-	Helpers: AkihabaraHelpers,
-	Input: AkihabaraInput,
-	Tools: AkihabaraTools,
-	Toys: AkihabaraToys,
-	Tile: AkihabaraTile,
+    Media: AkihabaraMediaBox,
+    Gamecycle: AkihabaraGamecycle,
+    Helpers: AkihabaraHelpers,
+    Input: AkihabaraInput,
+    Tools: AkihabaraTools,
+    Toys: AkihabaraToys,
+    Tile: AkihabaraTile,
 
-	plugins: {
-		"Topview": AkihabaraTopview,
-		"Platformer": AkihabaraPlatformer,
-		"Shmup": AkihabaraShmup
-	}
+    plugins: {
+        "Topview": AkihabaraTopview,
+        "Platformer": AkihabaraPlatformer,
+        "Shmup": AkihabaraShmup
+    }
 };

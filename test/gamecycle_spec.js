@@ -1,2 +1,0 @@
-describe("AkihabaraGamecycle", function () {
-});

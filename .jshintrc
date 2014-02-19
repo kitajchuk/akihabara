@@ -1,18 +1,8 @@
 {
-    "predef": [
-        "jasmine", "it", "describe", "expect", "ActiveXObject", "createRequest",
-
-        "Akihabara", "AkihabaraAudio", "AkihabaraInput", "AkihabaraDebug", "AkihabaraDevices",
-        "AkihabaraGamecycle", "AkihabaraToys", "AkihabaraTrigo", "AkihabaraIphofretboard",
-        "AkihabaraIphopad", "AkihabaraHelpers", "AkihabaraGamebox", "AkihabaraTools",
-        "AkihabaraTile", "AkihabaraTopview", "AkihabaraShmup", "AkihabaraPlatformer"
-    ],
-
     // Browser, Frameworks and Globals
     "browser"     : true, // Browser globals (window, document and so on)
     "dojo"        : false,
-    "es5"         : true,
-    "jquery"      : true,
+    "jquery"      : false,
     "mootools"    : false,
     "node"        : false,
     "prototypejs" : false,
@@ -51,8 +41,32 @@
     "onevar"        : false,  // Allow only one `var` statement per function.
     "plusplus"      : false,  // Prohibit use of `++` & `--`.
     "sub"           : true,  // Tolerate all forms of subscript notation besides dot notation e.g. `dict['key']` instead of `dict.key`.
-    "trailing"      : true,   // Prohibit trailing whitespaces.
-    "white"         : true,   // Check against strict whitespace and indentation rules.
+    "trailing"      : false,   // Prohibit trailing whitespaces.
+    "white"         : false,   // Check against strict whitespace and indentation rules.
     "smarttabs"     : false,  // Only tabs
-    "indent"        : 4       // Specify indentation spacing
+    "indent"        : 4,       // Specify indentation spacing
+    
+    // Globals
+    "globals": {
+        "Akihabara": true,
+        "AkihabaraCachelist": true,
+        "AkihabaraCyclelist": true,
+        "AkihabaraDebug": true,
+        "AkihabaraDevices": true,
+        "AkihabaraDynalist": true,
+        "AkihabaraGamebox": true,
+        "AkihabaraGamecycle": true,
+        "AkihabaraHelpers": true,
+        "AkihabaraInput": true,
+        "AkihabaraInterface": true,
+        "AkihabaraIphopad": true,
+        "AkihabaraTile": true,
+        "AkihabaraTools": true,
+        "AkihabaraTopview": true,
+        "AkihabaraPlatformer": true,
+        "AkihabaraShmup": true,
+        "AkihabaraToys": true,
+        "AkihabaraTrigo": true,
+        "AkihabaraMediaBox": true
+    }
 }
