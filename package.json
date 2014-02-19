@@ -24,7 +24,8 @@
     ],
     "main": "Gruntfile.js",
     "dependencies": {
-        "jsource": "~0.1"
+        "jsource": "~0.1",
+        "jsdoc": "~3.2"
     },
     "devDependencies": {
         "grunt": "~0.4",

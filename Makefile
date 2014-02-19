@@ -12,4 +12,4 @@ ALLFILES = $(SRCDIR)
 jsdocs:
 	mkdir -p $(DOCDIR)
 	rm -rf $(DOCDIR)/*
-	dependencies/jsdoc/jsdoc -r $(ALLFILES) -d $(DOCDIR)
+	node_modules/jsdoc/jsdoc -r $(ALLFILES) -d $(DOCDIR)
