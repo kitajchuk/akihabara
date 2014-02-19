@@ -1154,19 +1154,87 @@ window.MediaBox = MediaBox;
 
 
 })( window );
-/**
- * Akihabara wrapper for jsource MediaBox
- * https://github.com/kitajchuk/jsource/blob/master/src/MediaBox.js
- * @author: kitajchuk
- * @namespace AkihabaraMediaBox
- */
-(function ( window ) {
+(function ( MediaBox ) {
+
+
+    /**
+     *
+     * AkihabaraMediaBox augments JSource MediaBox Class
+     * https://github.com/kitajchuk/jsource/blob/master/src/MediaBox.js
+     * @constructor AkihabaraMediaBox
+     * @augments MediaBox
+     * @see {@link MediaBox}
+     * @author kitajchuk
+     *
+     */
+    var AkihabaraMediaBox = function () {};
+    AkihabaraMediaBox.prototype = new MediaBox();
     
-    var AkihabaraMediaBox = ( window.MediaBox ) ? new window.MediaBox() : null;
     
-    window.AkihabaraMediaBox = AkihabaraMediaBox;
+    /**
+     *
+     * Renders a video to a canvas context
+     * @memberof AkihabaraMediaBox
+     * @method AkihabaraMediaBox.blitVideo
+     * @param {string} id The id of the video
+     * @param {object} cx The canvas context
+     * @param {number} x The x position to render at
+     * @param {number} y The y position to render at
+     * @param {number} w The width to render
+     * @param {number} h The height to render
+     * @param {function} cb Optional callback fired when video is paused or ended
+     *
+     */
+    AkihabaraMediaBox.prototype.blitVideo = function ( id, cx, x, y, w, h, cb ) {
+        if ( !this._video[ id ] ) {
+            return this;
+        }
+        
+        var timeout = null;
+        
+        function blit() {
+            try {
+                clearTimeout( timeout );
+                
+            } catch ( error ) {}
+            
+            if ( !this._video[ id ].element.paused && !this._video[ id ].element.ended ) {
+                cx.drawImage(
+                    this._video[ id ],
+                    x,
+                    y,
+                    w,
+                    h
+                );
+                
+                timeout = setTimeout( blit, 0 );
+                
+            } else {
+                timeout = null;
+                
+                if ( typeof cb === "function" ) {
+                    cb();
+                }
+            }
+        }
+        
+        blit();
+    };
     
-})( window );
+    
+    /**
+     *
+     * Exposed instanceof AkihabaraMediaBox
+     * @namespace AkihabaraMediabox
+     * @see {@link MediaBox}
+     * @author kitajchuk
+     * @global
+     *
+     */
+    window.AkihabaraMediabox = new AkihabaraMediaBox();
+
+
+})( window.MediaBox );
 /**
  * The main purpose of this module is to provide functions to integrate
  * all akibahara modules easily.
