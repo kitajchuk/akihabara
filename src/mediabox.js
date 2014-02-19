@@ -45,7 +45,7 @@
             
             if ( !self._video[ id ].element.paused && !self._video[ id ].element.ended ) {
                 cx.drawImage(
-                    self._video[ id ],
+                    self._video[ id ].element,
                     x,
                     y,
                     w,
