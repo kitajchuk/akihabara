@@ -22,6 +22,12 @@ You can load any of the files from the dist directory depending on what type of 
  - akihabara.platformer.js
  - akihabara.shmup.js
 
+### Developers Notes
+Right now I am overriding the AkihabaraGamebox._basepath property in the AkihabaraGamebox.onLoad callback to get around now using [akihabara as a node module](https://www.npmjs.org/package/akihabara). My ultimate goal is to get rid of all the splash and preload stuff since its not supportive of fully custom game intros. I'm currently using a fully customized game intro with no splash in my project.
+```js
+AkihabaraGamebox._basepath = "/node_modules/akihabara/images/";
+```
+
 
 ...
 
