@@ -1190,7 +1190,8 @@ window.MediaBox = MediaBox;
             return this;
         }
         
-        var timeout = null;
+        var timeout = null,
+            self = this;
         
         function blit() {
             try {
@@ -1198,9 +1199,9 @@ window.MediaBox = MediaBox;
                 
             } catch ( error ) {}
             
-            if ( !this._video[ id ].element.paused && !this._video[ id ].element.ended ) {
+            if ( !self._video[ id ].element.paused && !self._video[ id ].element.ended ) {
                 cx.drawImage(
-                    this._video[ id ],
+                    self._video[ id ],
                     x,
                     y,
                     w,
