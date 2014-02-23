@@ -622,19 +622,25 @@ var AkihabaraTopview = {
             AkihabaraTopview.adjustZindex(this);
             if (this.duration != null) {
                 this.duration--;
-                if (this.duration === 0) { AkihabaraGamebox.trashObject(this); }
+                if (this.duration === 0) { this.spark(this);AkihabaraGamebox.trashObject(this); }
             }
             if (!this.bulletIsAlive()) {
                 AkihabaraGamebox.trashObject(this);
             } else if (this.toucheddown || this.touchedup || this.touchedleft || this.touchedright) {
                 this.onWallHit();
             } else if (this.collidegroup != null) {
-                for (var i in AkihabaraGamebox._objects[this.collidegroup]) {
-                    if ((!AkihabaraGamebox._objects[this.collidegroup][i].initialize) && AkihabaraTopview.collides(this, AkihabaraGamebox._objects[this.collidegroup][i], AkihabaraGamebox._objects[this.collidegroup][i].tolerance)) {
-                        if (AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet != null) {
-                            if (!AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet(this)) {
-                                this.spark(this);
-                                AkihabaraGamebox.trashObject(this);
+                if ( !Array.isArray( this.collidegroup ) ) {
+                    this.collidegroup = [this.collidegroup];
+                }
+                
+                for ( var j = this.collidegroup.length; j--; ) {
+                    for (var i in AkihabaraGamebox._objects[this.collidegroup[j]]) {
+                        if ((!AkihabaraGamebox._objects[this.collidegroup[j]][i].initialize) && AkihabaraTopview.collides(this, AkihabaraGamebox._objects[this.collidegroup[j]][i], AkihabaraGamebox._objects[this.collidegroup[j]][i].tolerance)) {
+                            if (AkihabaraGamebox._objects[this.collidegroup[j]][i].hitByBullet != null) {
+                                if (!AkihabaraGamebox._objects[this.collidegroup[j]][i].hitByBullet(this)) {
+                                    this.spark(this);
+                                    AkihabaraGamebox.trashObject(this);
+                                }
                             }
                         }
                     }
@@ -693,7 +699,6 @@ var AkihabaraTopview = {
                 duration: null,
                 onWallHit: function () {
                     this.spark(this);
-                    AkihabaraGamebox.trashObject(this);
                 },
                 bulletIsAlive: function () {
                     return AkihabaraGamebox.objectIsVisible(this);
@@ -719,9 +724,7 @@ var AkihabaraTopview = {
                 this.duration--;
                 if (this.duration === 0) { AkihabaraGamebox.trashObject(this); }
             }
-            if (!this.bulletIsAlive()) {
-                AkihabaraGamebox.trashObject(this);
-            } else if (this.toucheddown || this.touchedup || this.touchedleft || this.touchedright) {
+            if (this.toucheddown || this.touchedup || this.touchedleft || this.touchedright) {
                 this.onWallHit();
             } else if (this.collidegroup != null) {
                 if ( !Array.isArray( this.collidegroup ) ) {
@@ -734,7 +737,6 @@ var AkihabaraTopview = {
                             if (AkihabaraGamebox._objects[this.collidegroup[j]][i].hitByBullet != null) {
                                 if (!AkihabaraGamebox._objects[this.collidegroup[j]][i].hitByBullet(this)) {
                                     this.spark(this);
-                                    //AkihabaraGamebox.trashObject(this);
                                 }
                             }
                         }
