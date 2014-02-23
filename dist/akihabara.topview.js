@@ -6311,6 +6311,7 @@ var AkihabaraTopview = {
         return obj;
     },
     
+    // strike weapon: similar to firebullet but keeps frames in place for sword strike appearance
     strikeWeapon: function ( gr, id, data ) {
         var ts = AkihabaraGamebox.getTiles(data.tileset);
         var obj = AkihabaraGamebox.addObject(
@@ -6381,12 +6382,18 @@ var AkihabaraTopview = {
             } else if (this.toucheddown || this.touchedup || this.touchedleft || this.touchedright) {
                 this.onWallHit();
             } else if (this.collidegroup != null) {
-                for (var i in AkihabaraGamebox._objects[this.collidegroup]) {
-                    if ((!AkihabaraGamebox._objects[this.collidegroup][i].initialize) && AkihabaraTopview.collides(this, AkihabaraGamebox._objects[this.collidegroup][i], AkihabaraGamebox._objects[this.collidegroup][i].tolerance)) {
-                        if (AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet != null) {
-                            if (!AkihabaraGamebox._objects[this.collidegroup][i].hitByBullet(this)) {
-                                this.spark(this);
-                                //AkihabaraGamebox.trashObject(this);
+                if ( !Array.isArray( this.collidegroup ) ) {
+                    this.collidegroup = [this.collidegroup];
+                }
+                
+                for ( var j = this.collidegroup.length; j--; ) {
+                    for (var i in AkihabaraGamebox._objects[this.collidegroup[j]]) {
+                        if ((!AkihabaraGamebox._objects[this.collidegroup[j]][i].initialize) && AkihabaraTopview.collides(this, AkihabaraGamebox._objects[this.collidegroup[j]][i], AkihabaraGamebox._objects[this.collidegroup[j]][i].tolerance)) {
+                            if (AkihabaraGamebox._objects[this.collidegroup[j]][i].hitByBullet != null) {
+                                if (!AkihabaraGamebox._objects[this.collidegroup[j]][i].hitByBullet(this)) {
+                                    this.spark(this);
+                                    //AkihabaraGamebox.trashObject(this);
+                                }
                             }
                         }
                     }
@@ -6397,8 +6404,8 @@ var AkihabaraTopview = {
         obj[(data.bliton == null ? "blit" : data.bliton)] = function () {
             if (!AkihabaraGamebox.objectIsTrash(this)) {
                 AkihabaraGamebox.blitTile(AkihabaraGamebox.getBufferContext(), {tileset: this.tileset, tile: AkihabaraGamebox.decideFrame(this.cnt, this.frames), dx: this.x, dy: this.y + this.z, camera: this.camera, fliph: this.fliph, flipv: this.flipv});
-            } else {
-                data.cb.call( data.from );
+            } else if (typeof data.done === "function") {
+                data.done.call( data.from, this );
             }
         };
     
