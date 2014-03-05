@@ -297,7 +297,6 @@ var AkihabaraGamebox = {
     _framestart: 0,
     _zindex: AkihabaraDynalist.create(),
     _db: false,
-    _systemcookie: "__gboxsettings",
     _sessioncache: "",
     _breakcacheurl: function (a) {return (this._flags.offlinecache ? a : a + (a.indexOf("?") === -1 ? "?" : "&") + "_brc=" + AkihabaraGamebox._sessioncache); },
     _forcedidle: 0,
@@ -421,8 +420,6 @@ var AkihabaraGamebox = {
 
         var d = new Date();
         AkihabaraGamebox._sessioncache = d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear() + "-" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds();
-
-        AkihabaraGamebox._loadsettings(); // Load default configuration
 
         switch (AkihabaraGamebox._flags.fse) { // Initialize FSEs
         case "scanlines":
@@ -690,98 +687,6 @@ var AkihabaraGamebox = {
             this._zindexch.push({o: {g: th.group, o: th.id}, z: z});
         }
     },
-
-    _savesettings: function () {
-        var saved = "";
-        for (var k in this._keymap) { saved += "keymap-" + k + ":" + this._keymap[k] + "~"; }
-        for (var f in this._flags) {
-            switch (this._flagstype[f]) {
-            case "check":
-                saved += "flag-" + f + ":" + (this._flags[f] ? 1 : 0) + "~";
-                break;
-            case "list":
-                saved += "flag-" + f + ":" + this._flags[f] + "~";
-                break;
-            }
-        }
-        this.dataSave("sys", saved);
-    },
-    _loadsettings: function () {
-        var cfg = this.dataLoad("sys");
-        if (cfg !== null) {
-            cfg = cfg.split("~");
-            var kv;
-            var mk;
-            for (var i = 0; i < cfg.length; i++) {
-                kv = cfg[i].split(":");
-                mk = kv[0].split("-");
-                switch (mk[0]) {
-                case "keymap":
-                    this._keymap[mk[1]] = kv[1] * 1;
-                    break;
-                case "flag":
-                    switch (this._flagstype[mk[1]]) {
-                    case "check":
-                        this._flags[mk[1]] = kv[1] * 1;
-                        break;
-                    case "list":
-                        this._flags[mk[1]] = kv[1];
-                        break;
-                    }
-                    break;
-                }
-            }
-        }
-    },
-
-    /**
-    * Saves data to a browser cookie as a key-value pair, which can be restored later using AkihabaraGamebox.dataLoad. Only
-    * works if user has cookies enabled.
-    * @param {String} k The key which identifies the value you are storing.
-    * @param {String} v The value you wish to store. Needs to be a string!
-    * @param {String} d A date offset, to be added to the current date. Defines the cookie's expiration date. By default this is set to 10 years.
-    * @example
-    * // (from Capman)
-    * AkihabaraGamebox.dataSave("capman-hiscore",maingame.hud.getNumberValue("score","value"));
-    */
-    dataSave: function (k, v, d) {
-        var date = new Date();
-        date.setTime(date.getTime() + ((d ? d : 365 * 10) * 24 * 60 * 60 * 1000));
-        document.cookie = this._systemcookie + "~" + k + " = " + v + "; expires = " + date.toGMTString() + "; path = /";
-    },
-
-    /**
-    * Loads data from a browser cookie. Send it a key and it returns a value (if available). Only works if user has cookies enabled.
-    * @param {String} k The key which identifies the value you are loading.
-    * @param {String} a A switch to determine whether a string or a number is returned. By default a string is returned.
-    * @returns {Object} A string or a number loaded from the cookie.
-    * @example
-    * hiscore = AkihabaraGamebox.dataLoad("hiscore");
-    */
-    dataLoad: function (k, a) {
-        var nameeq = this._systemcookie + "~" + k + " = ";
-        var ca = document.cookie.split(";");
-        var rt;
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') { c = c.substring(1, c.length); }
-            if (c.indexOf(nameeq) === 0) {
-                rt = c.substring(nameeq.length, c.length);
-                if (a && a.number) {
-                    return rt * 1;
-                } else {
-                    return rt;
-                }
-            }
-        }
-        return null;
-    },
-
-    /**
-    * Clears a value stored in a  key-value pair in a browser cookie. Sets value to "". Only works if user has cookies enabled.
-    * @param {String} k The key which identifies the value you are clearing.
-    */
-    dataClear: function (k) { this.dataSave(k, "", -1); },
 
     /**
     * Gets the current camera object.

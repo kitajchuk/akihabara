@@ -12,6 +12,7 @@
      *
      */
     var AkihabaraMediabox = function () {};
+    
     AkihabaraMediabox.prototype = new MediaBox();
     
     

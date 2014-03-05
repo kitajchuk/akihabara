@@ -1154,6 +1154,656 @@ window.MediaBox = MediaBox;
 
 
 })( window );
+/*!
+ *
+ * Handle keeping track of game data using localStorage.
+ *
+ * @GameState Class
+ * @author: kitajchuk
+ *
+ */
+(function ( window, undefined ) {
+
+
+"use strict";
+
+
+var localStorage = window.localStorage,
+    
+    /**
+     *
+     * Keeps track of the players state in the game.
+     * Calls GameState.prototype.init as constructor.
+     * @constructor GameState
+     * @memberof! <global>
+     *
+     */
+    GameState = function () {
+        return this.init.apply( this, arguments );
+    };
+
+/**
+ *
+ * GameState Storage key index
+ * @memberof GameState
+ * @member GameState.storageKey
+ *
+ */
+GameState.storageKey = "_gamestate_";
+
+GameState.prototype = {
+    constructor: GameState,
+    
+    /**
+     *
+     * GameState Expression match dash/underscores before alpha chars
+     * @memberof GameState
+     * @member GameState._rDashHyphAlphas
+     *
+     */
+    _rDashHyphAlphas: /(?:-|--|_|__)([\da-z])/gi,
+    
+    /**
+     *
+     * GameState Flag whether to save to localStorage
+     * @memberof GameState
+     * @member GameState._doSaveState
+     *
+     */
+    _doSaveState: true,
+    
+    /**
+     *
+     * GameState state object internal
+     * @memberof GameState
+     * @member GameState._state
+     *
+     */
+    _state: {},
+    
+    /**
+     *
+     * GameState init constructor method
+     * @memberof GameState
+     * @method GameState.init
+     * @param {object} state The initial game state object to start with
+     *
+     */
+    init: function ( state ) {
+        state = (state || {});
+        
+        this._state = (this._loadState() || state);
+        
+        this._saveState();
+    },
+    
+    /**
+     *
+     * GameState can load state from localStorage
+     * @memberof GameState
+     * @method GameState._loadState
+     *
+     */
+    _loadState: function () {
+        var result;
+        
+        try {
+            if ( this._doSaveState ) {
+                result = JSON.parse( localStorage.getItem( GameState.storageKey ) );
+            }
+            
+        } catch ( error ) {}
+        
+        return result;
+    },
+    
+    /**
+     *
+     * GameState can save state to localStorage
+     * @memberof GameState
+     * @method GameState._saveState
+     *
+     */
+    _saveState: function () {
+        /**
+         *
+         * Write JSON stringified state to localStorage
+         * @event GameState#saveStateToLocalStorage
+         *
+         */
+        try {
+            if ( this._doSaveState ) {
+                localStorage.setItem( GameState.storageKey, JSON.stringify( this.getState() ) );
+            }
+            
+        } catch ( error ) {}
+    },
+    
+    /**
+     *
+     * GameState camelCase a string matching -, --, _ and __
+     * @memberof GameState
+     * @method GameState.camelCase
+     * @param {string} str The string to camelCase
+     *
+     */
+    camelCase: function ( str ) {
+        return str.replace( this._rDashHyphAlphas, function( all, letter ) {
+            return letter.toUpperCase();
+        });
+    },
+    
+    /**
+     *
+     * GameState retrieve state
+     * @memberof GameState
+     * @method GameState.getState
+     * @returns GameState._states
+     *
+     */
+    getState: function () {
+        return this._state;
+    },
+    
+    /**
+     *
+     * GameState set the state
+     * @memberof GameState
+     * @method GameState.setState
+     * @fires GameState#saveStateToLocalStorage
+     *
+     */
+    setState: function () {
+        this._saveState();
+    },
+    
+    /**
+     *
+     * GameState merge an initial state object in
+     * @memberof GameState
+     * @method GameState.pushState
+     * @param {object} state The initial game state object to start with
+     * @param {bool} force Pass true here to force override state properties
+     *
+     */
+    pushState: function ( state, force ) {
+        for ( var i in state ) {
+            if ( this._state[ i ] === undefined || force ) {
+                this._state[ i ] = state[ i ];
+            }
+        }
+        
+        this._saveState();
+    },
+    
+    /**
+     *
+     * GameState add a new game state key: value pair
+     * @memberof GameState
+     * @method GameState.setValue
+     * @param {string} id The unique key
+     * @param {mixed} value The value to be set for the key
+     * @param {bool} format Whether to format the key first using camelCase
+     * @fires GameState#saveStateToLocalStorage
+     *
+     */
+    setValue: function ( id, value, format ) {
+        this._state[ id ] = value;
+        
+        this._saveState();
+    },
+    
+    /**
+     *
+     * GameState add a new game state prop to a key that is an object
+     * @memberof GameState
+     * @method GameState.setValueDeep
+     * @param {string} id The unique key
+     * @param {string} prop The unique property
+     * @param {mixed} value The value to be set for the key
+     * @fires GameState#saveStateToLocalStorage
+     *
+     */
+    setValueDeep: function ( id, prop, value ) {
+        if ( this._state[ id ] ) {
+            this._state[ id ][ prop ] = value;
+        
+            this._saveState();
+        }
+    },
+    
+    /**
+     *
+     * GameState get the value for a state key
+     * @memberof GameState
+     * @method GameState.getValue
+     * @param {string} id The unique key
+     * @returns The value for the key or undefined
+     *
+     */
+    getValue: function ( id ) {
+        return this._state[ id ];
+    },
+    
+    /**
+     *
+     * GameState get the value for a state key
+     * @memberof GameState
+     * @method GameState.getValue
+     * @param {string} id The unique key
+     * @param {string} prop The unique property
+     * @returns The value for the key/prop or undefined
+     *
+     */
+    getValueDeep: function ( id, prop ) {
+        if ( this._state[ id ] ) {
+            return this._state[ id ][ prop ];
+        }
+    }
+};
+
+
+// Expose
+window.GameState = GameState;
+
+
+})( window );
+/*!
+ *
+ * Keep a log of a games quests and their statuses.
+ *
+ * @GameQuest Class
+ * @author: kitajchuk
+ *
+ */
+(function ( window, undefined ) {
+
+
+"use strict";
+
+
+var localStorage = window.localStorage,
+    
+    /**
+     *
+     * Keeps track of quest status for a player.
+     * Calls GameQuest.prototype.init as constructor.
+     * @constructor GameQuest
+     * @memberof! <global>
+     *
+     */
+    GameQuest = function () {
+        return this.init.apply( this, arguments );
+    };
+
+/**
+ *
+ * GameQuest Storage key index
+ * @memberof GameQuest
+ * @member GameQuest.storageKey
+ *
+ */
+GameQuest.storageKey = "_gamequest_";
+
+GameQuest.prototype = {
+    constructor: GameQuest,
+    
+    /**
+     *
+     * GameQuest Flag whether to save to localStorage
+     * @memberof GameQuest
+     * @member GameQuest._doSaveQuests
+     *
+     */
+    _doSaveQuests: true,
+    
+    /**
+     *
+     * GameQuest quests object internal
+     * @memberof GameQuest
+     * @member GameQuest._quests
+     *
+     */
+    _quests: {},
+    
+    /**
+     *
+     * GameQuest init constructor method
+     * @memberof GameQuest
+     * @method GameQuest.init
+     * @param {object} quests The default quest status to start with
+     *
+     */
+    init: function ( quests ) {
+        quests = (quests || {});
+        
+        this._quests = (this._loadQuests() || quests);
+        
+        this._saveQuests();
+    },
+    
+    /**
+     *
+     * GameQuest can load quest status from localStorage
+     * @memberof GameQuest
+     * @method GameQuest._loadQuests
+     *
+     */
+    _loadQuests: function () {
+        var result;
+        
+        try {
+            if ( this._doSaveQuests ) {
+                result = JSON.parse( localStorage.getItem( GameQuest.storageKey ) );
+            }
+            
+        } catch ( error ) {}
+        
+        return result;
+    },
+    
+    /**
+     *
+     * GameQuest can save quest status to localStorage
+     * @memberof GameQuest
+     * @method GameQuest._saveQuests
+     *
+     */
+    _saveQuests: function () {
+        /**
+         *
+         * Write JSON stringified quest status to localStorage
+         * @event GameQuest#saveQuestsToLocalStorage
+         *
+         */
+        try {
+            if ( this._doSaveQuests ) {
+                localStorage.setItem( GameQuest.storageKey, JSON.stringify( this.getQuests() ) );
+            }
+            
+        } catch ( error ) {}
+    },
+    
+    /**
+     *
+     * GameQuest retrieve all quests
+     * @memberof GameQuest
+     * @method GameQuest.getQuests
+     * @returns GameQuest._quests
+     *
+     */
+    getQuests: function () {
+        return this._quests;
+    },
+    
+    /**
+     *
+     * GameQuest set all quests
+     * @memberof GameQuest
+     * @method GameQuest.setQuests
+     * @fires GameQuest#saveQuestsToLocalStorage
+     *
+     */
+    setQuests: function () {
+        this._saveQuests();
+    },
+    
+    /**
+     *
+     * GameQuest add a new quest
+     * @memberof GameQuest
+     * @method GameQuest.addQuest
+     * @param {string} id Unique id for the quest being added
+     * @fires GameQuest#saveQuestsToLocalStorage
+     *
+     */
+    addQuest: function ( id ) {
+        if ( this._quests[ id ] ) {
+            //console.log( "@GameQuest:addQuest", "quest \"" + id + "\" already exists." );
+            
+            return this;
+        }
+        
+        this._quests[ id ] = {
+            complete: false,
+            
+            // Perhaps a quest can have
+            // parameters that must be fulfilled
+            // before it is allowed to be marked
+            // as complete...
+            parameters: {}
+        };
+        
+        this._saveQuests();
+    },
+    
+    /**
+     *
+     * GameQuest mark a quest as completed
+     * @memberof GameQuest
+     * @method GameQuest.completeQuest
+     * @param {string} id Unique id for the quest
+     * @fires GameQuest#saveQuestsToLocalStorage
+     *
+     */
+    completeQuest: function ( id ) {
+        if ( this._quests[ id ] ) {
+            this._quests[ id ].complete = true;
+            
+            this._saveQuests();
+        }
+    },
+    
+    /**
+     *
+     * GameQuest delete a quest
+     * @memberof GameQuest
+     * @method GameQuest.removeQuest
+     * @param {string} id Unique id for the quest
+     * @fires GameQuest#saveQuestsToLocalStorage
+     *
+     */
+    removeQuest: function ( id ) {
+        if ( this._quests[ id ] ) {
+            delete this._quests[ id ];
+            
+            this._saveQuests();
+        }
+    },
+    
+    /**
+     *
+     * GameQuest get a quest by its id
+     * @memberof GameQuest
+     * @method GameQuest.getQuest
+     * @param {string} id Unique id for the quest
+     *
+     */
+    getQuest: function ( id ) {
+        return this._quests[ id ];
+    },
+    
+    /**
+     *
+     * GameQuest get completed status of a quest
+     * @memberof GameQuest
+     * @method GameQuest.isQuestComplete
+     * @param {string} id Unique id for the quest
+     * @returns Boolean
+     *
+     */
+    isQuestComplete: function ( id ) {
+        return (this._quests[ id ] && this._quests[ id ].complete);
+    }
+};
+
+
+// Expose
+window.GameQuest = GameQuest;
+
+
+})( window );
+/*!
+ *
+ * Set, add and manage 2D array representations of game maps.
+ *
+ * @GameScreen Class
+ * @author: kitajchuk
+ *
+ */
+(function ( window, undefined ) {
+
+
+"use strict";
+
+
+/**
+ *
+ * Maintains the 2D Array of the overworld map.
+ * Calls GameScreen.prototype.init as constructor.
+ * @constructor GameScreen
+ * @memberof! <global>
+ *
+ */
+var GameScreen = function () {
+    return this.init.apply( this, arguments );
+};
+
+GameScreen.prototype = {
+    constructor: GameScreen,
+    
+    /**
+     *
+     * GameScreen screens object internal
+     * @memberof GameQuest
+     * @member GameQuest._screens
+     *
+     */
+    _screens: {},
+    
+    /**
+     *
+     * GameScreen init constructor method
+     * @memberof GameScreen
+     * @method GameScreen.init
+     * @param {object} screens Hash of 2D array mappings for the game screens
+     *
+     */
+    init: function ( screens ) {
+        this._screens = (screens || this._screens);
+    },
+    
+    /**
+     *
+     * GameScreen get screen ref
+     * @memberof GameScreen
+     * @method GameScreen.getScreen
+     * @param {string} id The id of the screen to get
+     * @returns GameScreen._screens[ id ]
+     *
+     */
+    getScreen: function ( id ) {
+        return this._screens[ id ];
+    },
+    
+    /**
+     *
+     * GameScreen add a screen
+     * @memberof GameScreen
+     * @method GameScreen.addScreen
+     * @param {string} id The id of the screen to get
+     * @param {number} width The width of the 2D array
+     * @param {number} height The height of the 2D array
+     * @param {number} start Optional value to start at
+     *
+     */
+    addScreen: function ( id, width, height, start ) {
+        var screen = [],
+            value = (start || 0);
+        
+        for ( var y = 0; y < height; y++ ) {
+            screen[ y ] = [];
+            
+            for ( var x = 0; x < width; x++ ) {
+                screen[ y ][ x ] = value;
+                
+                value++;
+            }
+        }
+        
+        this.setScreen( id, screen );
+    },
+    
+    /**
+     *
+     * GameScreen set a screen
+     * @memberof GameScreen
+     * @method GameScreen.setScreen
+     * @param {string} id The id of the screen to get
+     * @param {array} screen The 2D array screen to add
+     *
+     */
+    setScreen: function ( id, screen ) {
+        this._screens[ id ] = screen;
+    },
+    
+    /**
+     *
+     * GameScreen get a screen value for a screen position
+     * @memberof GameScreen
+     * @method GameScreen.getScreenValue
+     * @param {string} id The id of the screen to get
+     * @param {object} pos The current screen position (x, y)
+     * @returns The indexed value at the given position or undefined
+     *
+     */
+    getScreenValue: function ( id, pos ) {
+        var screen = this.getScreen( id ),
+            result;
+        
+        // The screen is valid if both its row and column index exist in the screen map
+        if ( screen[ pos.y ] !== undefined && screen[ pos.y ][ pos.x ] !== undefined ) {
+            result = screen[ pos.y ][ pos.x ];
+        }
+        
+        return result;
+    },
+    
+    /**
+     *
+     * GameScreen get a screen position for a screen value
+     * @memberof GameScreen
+     * @method GameScreen.getScreenPosition
+     * @param {string} id The id of the screen to get
+     * @param {mixed} val The value you need to look up
+     * @returns The (x, y) position if value is matched
+     *
+     */
+    getScreenPosition: function ( id, val ) {
+        var screen = this.getScreen( id ),
+            result;
+        
+        for ( var y = screen.length; y--; ) {
+            for ( var x = screen[ y ].length; x--; ) {
+                if ( screen[ y ][ x ] === val ) {
+                    result = {
+                        x: x,
+                        y: y
+                    };
+                }
+            }
+        }
+        
+        return result;
+    }
+};
+
+
+// Expose
+window.GameScreen = GameScreen;
+
+
+})( window );
 (function ( MediaBox ) {
 
 
@@ -1168,6 +1818,7 @@ window.MediaBox = MediaBox;
      *
      */
     var AkihabaraMediabox = function () {};
+    
     AkihabaraMediabox.prototype = new MediaBox();
     
     
@@ -1227,6 +1878,69 @@ window.MediaBox = MediaBox;
 
 
 })( window.MediaBox );
+(function ( GameState ) {
+
+
+    /**
+     *
+     * AkihabaraGamestate augments Gamed GameState Class
+     * https://github.com/kitajchuk/gamed/blob/master/src/GameState.js
+     * @constructor AkihabaraGamestate
+     * @augments GameState
+     * @see {@link GameState}
+     * @author kitajchuk
+     *
+     */
+    var AkihabaraGamestate = function () {};
+    
+    AkihabaraGamestate.prototype = new GameState();
+    
+    window.AkihabaraGamestate = new AkihabaraGamestate();
+
+
+})( window.GameState );
+(function ( GameQuest ) {
+
+
+    /**
+     *
+     * AkihabaraGamequest augments Gamed GameQuest Class
+     * https://github.com/kitajchuk/gamed/blob/master/src/GameQuest.js
+     * @constructor AkihabaraGamequest
+     * @augments GameQuest
+     * @see {@link GameQuest}
+     * @author kitajchuk
+     *
+     */
+    var AkihabaraGamequest = function () {};
+    
+    AkihabaraGamequest.prototype = new GameQuest();
+    
+    window.AkihabaraGamequest = new AkihabaraGamequest();
+
+
+})( window.GameQuest );
+(function ( GameScreen ) {
+
+
+    /**
+     *
+     * AkihabaraGamescreen augments Gamed GameScreen Class
+     * https://github.com/kitajchuk/gamed/blob/master/src/GameScreen.js
+     * @constructor AkihabaraGamescreen
+     * @augments GameScreen
+     * @see {@link GameQuest}
+     * @author kitajchuk
+     *
+     */
+    var AkihabaraGamescreen = function () {};
+    
+    AkihabaraGamescreen.prototype = new GameScreen();
+    
+    window.AkihabaraGamescreen = new AkihabaraGamescreen();
+
+
+})( window.GameScreen );
 /**
  * The main purpose of this module is to provide functions to integrate
  * all akibahara modules easily.
@@ -2151,7 +2865,6 @@ var AkihabaraGamebox = {
     _framestart: 0,
     _zindex: AkihabaraDynalist.create(),
     _db: false,
-    _systemcookie: "__gboxsettings",
     _sessioncache: "",
     _breakcacheurl: function (a) {return (this._flags.offlinecache ? a : a + (a.indexOf("?") === -1 ? "?" : "&") + "_brc=" + AkihabaraGamebox._sessioncache); },
     _forcedidle: 0,
@@ -2275,8 +2988,6 @@ var AkihabaraGamebox = {
 
         var d = new Date();
         AkihabaraGamebox._sessioncache = d.getDate() + "-" + d.getMonth() + "-" + d.getFullYear() + "-" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds();
-
-        AkihabaraGamebox._loadsettings(); // Load default configuration
 
         switch (AkihabaraGamebox._flags.fse) { // Initialize FSEs
         case "scanlines":
@@ -2544,98 +3255,6 @@ var AkihabaraGamebox = {
             this._zindexch.push({o: {g: th.group, o: th.id}, z: z});
         }
     },
-
-    _savesettings: function () {
-        var saved = "";
-        for (var k in this._keymap) { saved += "keymap-" + k + ":" + this._keymap[k] + "~"; }
-        for (var f in this._flags) {
-            switch (this._flagstype[f]) {
-            case "check":
-                saved += "flag-" + f + ":" + (this._flags[f] ? 1 : 0) + "~";
-                break;
-            case "list":
-                saved += "flag-" + f + ":" + this._flags[f] + "~";
-                break;
-            }
-        }
-        this.dataSave("sys", saved);
-    },
-    _loadsettings: function () {
-        var cfg = this.dataLoad("sys");
-        if (cfg !== null) {
-            cfg = cfg.split("~");
-            var kv;
-            var mk;
-            for (var i = 0; i < cfg.length; i++) {
-                kv = cfg[i].split(":");
-                mk = kv[0].split("-");
-                switch (mk[0]) {
-                case "keymap":
-                    this._keymap[mk[1]] = kv[1] * 1;
-                    break;
-                case "flag":
-                    switch (this._flagstype[mk[1]]) {
-                    case "check":
-                        this._flags[mk[1]] = kv[1] * 1;
-                        break;
-                    case "list":
-                        this._flags[mk[1]] = kv[1];
-                        break;
-                    }
-                    break;
-                }
-            }
-        }
-    },
-
-    /**
-    * Saves data to a browser cookie as a key-value pair, which can be restored later using AkihabaraGamebox.dataLoad. Only
-    * works if user has cookies enabled.
-    * @param {String} k The key which identifies the value you are storing.
-    * @param {String} v The value you wish to store. Needs to be a string!
-    * @param {String} d A date offset, to be added to the current date. Defines the cookie's expiration date. By default this is set to 10 years.
-    * @example
-    * // (from Capman)
-    * AkihabaraGamebox.dataSave("capman-hiscore",maingame.hud.getNumberValue("score","value"));
-    */
-    dataSave: function (k, v, d) {
-        var date = new Date();
-        date.setTime(date.getTime() + ((d ? d : 365 * 10) * 24 * 60 * 60 * 1000));
-        document.cookie = this._systemcookie + "~" + k + " = " + v + "; expires = " + date.toGMTString() + "; path = /";
-    },
-
-    /**
-    * Loads data from a browser cookie. Send it a key and it returns a value (if available). Only works if user has cookies enabled.
-    * @param {String} k The key which identifies the value you are loading.
-    * @param {String} a A switch to determine whether a string or a number is returned. By default a string is returned.
-    * @returns {Object} A string or a number loaded from the cookie.
-    * @example
-    * hiscore = AkihabaraGamebox.dataLoad("hiscore");
-    */
-    dataLoad: function (k, a) {
-        var nameeq = this._systemcookie + "~" + k + " = ";
-        var ca = document.cookie.split(";");
-        var rt;
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) === ' ') { c = c.substring(1, c.length); }
-            if (c.indexOf(nameeq) === 0) {
-                rt = c.substring(nameeq.length, c.length);
-                if (a && a.number) {
-                    return rt * 1;
-                } else {
-                    return rt;
-                }
-            }
-        }
-        return null;
-    },
-
-    /**
-    * Clears a value stored in a  key-value pair in a browser cookie. Sets value to "". Only works if user has cookies enabled.
-    * @param {String} k The key which identifies the value you are clearing.
-    */
-    dataClear: function (k) { this.dataSave(k, "", -1); },
 
     /**
     * Gets the current camera object.

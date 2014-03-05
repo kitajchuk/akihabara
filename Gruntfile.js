@@ -9,7 +9,13 @@ module.exports = function ( grunt ) {
     var topview = {
         src: [
             "node_modules/jsource/dist/MediaBox.js",
-            "src/mediabox.js",
+            "node_modules/gamed/dist/GameState.js",
+            "node_modules/gamed/dist/GameQuest.js",
+            "node_modules/gamed/dist/GameScreen.js",
+            "src/includes/mediabox.js",
+            "src/includes/gamestate.js",
+            "src/includes/gamequest.js",
+            "src/includes/gamescreen.js",
             "src/akihabara.js",
             "src/input.js",
             "src/debug.js",
@@ -28,7 +34,13 @@ module.exports = function ( grunt ) {
     var platformer = {
         src: [
             "node_modules/jsource/dist/MediaBox.js",
-            "src/mediabox.js",
+            "node_modules/gamed/dist/GameState.js",
+            "node_modules/gamed/dist/GameQuest.js",
+            "node_modules/gamed/dist/GameScreen.js",
+            "src/includes/mediabox.js",
+            "src/includes/gamestate.js",
+            "src/includes/gamequest.js",
+            "src/includes/gamescreen.js",
             "src/akihabara.js",
             "src/input.js",
             "src/debug.js",
@@ -47,7 +59,13 @@ module.exports = function ( grunt ) {
     var shmup = {
         src: [
             "node_modules/jsource/dist/MediaBox.js",
-            "src/mediabox.js",
+            "node_modules/gamed/dist/GameState.js",
+            "node_modules/gamed/dist/GameQuest.js",
+            "node_modules/gamed/dist/GameScreen.js",
+            "src/includes/mediabox.js",
+            "src/includes/gamestate.js",
+            "src/includes/gamequest.js",
+            "src/includes/gamescreen.js",
             "src/akihabara.js",
             "src/input.js",
             "src/debug.js",
