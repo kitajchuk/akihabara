@@ -17,6 +17,7 @@
     AkihabaraGamestate.storageKey = GameState.storageKey;
     
     window.AkihabaraGamestate = new AkihabaraGamestate();
+    window.AkihabaraGamestate.storageKey = GameState.storageKey;
 
 
 })( window.GameState );

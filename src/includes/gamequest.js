@@ -17,6 +17,7 @@
     AkihabaraGamequest.storageKey = GameQuest.storageKey;
     
     window.AkihabaraGamequest = new AkihabaraGamequest();
+    window.AkihabaraGamequest.storageKey = GameQuest.storageKey;
 
 
 })( window.GameQuest );

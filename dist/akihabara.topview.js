@@ -1897,6 +1897,7 @@ window.GameScreen = GameScreen;
     AkihabaraGamestate.storageKey = GameState.storageKey;
     
     window.AkihabaraGamestate = new AkihabaraGamestate();
+    window.AkihabaraGamestate.storageKey = GameState.storageKey;
 
 
 })( window.GameState );
@@ -1919,6 +1920,7 @@ window.GameScreen = GameScreen;
     AkihabaraGamequest.storageKey = GameQuest.storageKey;
     
     window.AkihabaraGamequest = new AkihabaraGamequest();
+    window.AkihabaraGamequest.storageKey = GameQuest.storageKey;
 
 
 })( window.GameQuest );
