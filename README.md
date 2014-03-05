@@ -12,9 +12,19 @@ npm install akihabara
 
 
 ## What's New
+I have implemented several new aspects of the framework. I have been building a game using Akihabara, hence this forked version and all the updates. 
 
 ### AkihabaraMediabox
-I have implemented a media portion of the framework. I have been building a game using Akihabara, hence this forked version and all the updates. The AkihabaraMediabox instance of [MediaBox](https://github.com/kitajchuk/jsource/blob/master/src/MediaBox.js) from my [JSource](https://github.com/kitajchuk/jsource/) repository. AkihabaraMediabox extends MediaBox, addings some new methods more specific to the gaming engine.
+I have included an AkihabaraMediabox instance of [MediaBox](https://github.com/kitajchuk/jsource/blob/master/src/MediaBox.js) from my [JSource](https://github.com/kitajchuk/jsource/) repository. AkihabaraMediabox extends MediaBox, addings some new methods more specific to the gaming engine.
+
+### AkihabaraGamestate
+I have included an AkihabaraGamestate instance of [GameState](https://github.com/kitajchuk/gamed/blob/master/src/GameState.js) from my [Gamed](https://github.com/kitajchuk/gamed/) repository.
+
+### AkihabaraGamequest
+I have included an AkihabaraGamequest instance of [GameQuest](https://github.com/kitajchuk/gamed/blob/master/src/GameQuest.js) from my [Gamed](https://github.com/kitajchuk/gamed/) repository.
+
+### AkihabaraGamescreen
+I have included an AkihabaraGamescreen instance of [GameScreen](https://github.com/kitajchuk/gamed/blob/master/src/GameScreen.js) from my [Gamed](https://github.com/kitajchuk/gamed/) repository.
 
 ### Akihabara Dist Files
 You can load any of the files from the dist directory depending on what type of game you are making. The following dist files exist:
