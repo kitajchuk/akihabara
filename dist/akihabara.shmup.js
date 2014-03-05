@@ -1894,6 +1894,7 @@ window.GameScreen = GameScreen;
     var AkihabaraGamestate = function () {};
     
     AkihabaraGamestate.prototype = new GameState();
+    AkihabaraGamestate.storageKey = GameState.storageKey;
     
     window.AkihabaraGamestate = new AkihabaraGamestate();
 
@@ -1915,6 +1916,7 @@ window.GameScreen = GameScreen;
     var AkihabaraGamequest = function () {};
     
     AkihabaraGamequest.prototype = new GameQuest();
+    AkihabaraGamequest.storageKey = GameQuest.storageKey;
     
     window.AkihabaraGamequest = new AkihabaraGamequest();
 

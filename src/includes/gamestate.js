@@ -14,6 +14,7 @@
     var AkihabaraGamestate = function () {};
     
     AkihabaraGamestate.prototype = new GameState();
+    AkihabaraGamestate.storageKey = GameState.storageKey;
     
     window.AkihabaraGamestate = new AkihabaraGamestate();
 
