@@ -6,80 +6,36 @@
 module.exports = function ( grunt ) {
     
     
+    var akicore = [
+        "node_modules/jsource/dist/MediaBox.js",
+        "node_modules/gamed/dist/GameState.js",
+        "node_modules/gamed/dist/GameQuest.js",
+        "node_modules/gamed/dist/GameScreen.js",
+        "src/includes/mediabox.js",
+        "src/includes/gamestate.js",
+        "src/includes/gamequest.js",
+        "src/includes/gamescreen.js",
+        "src/akihabara.js",
+        "src/input.js",
+        "src/debug.js",
+        "src/trigo.js",
+        "src/gbox.js",
+        "src/iphopad.js",
+        "src/toys.js",
+        "src/tile.js",
+        "src/helpers.js",
+        "src/tools.js",
+        "src/gamecycle.js",
+        "src/devices.js"
+    ];
     var topview = {
-        src: [
-            "node_modules/jsource/dist/MediaBox.js",
-            "node_modules/gamed/dist/GameState.js",
-            "node_modules/gamed/dist/GameQuest.js",
-            "node_modules/gamed/dist/GameScreen.js",
-            "src/includes/mediabox.js",
-            "src/includes/gamestate.js",
-            "src/includes/gamequest.js",
-            "src/includes/gamescreen.js",
-            "src/akihabara.js",
-            "src/input.js",
-            "src/debug.js",
-            "src/trigo.js",
-            "src/gbox.js",
-            "src/iphopad.js",
-            "src/toys.js",
-            "src/tile.js",
-            "src/helpers.js",
-            "src/tools.js",
-            "src/gamecycle.js",
-            "src/devices.js",
-            "src/plugins/topview.js"
-        ]
+        src: akicore.concat( ["src/plugins/topview.js"] )
     };
     var platformer = {
-        src: [
-            "node_modules/jsource/dist/MediaBox.js",
-            "node_modules/gamed/dist/GameState.js",
-            "node_modules/gamed/dist/GameQuest.js",
-            "node_modules/gamed/dist/GameScreen.js",
-            "src/includes/mediabox.js",
-            "src/includes/gamestate.js",
-            "src/includes/gamequest.js",
-            "src/includes/gamescreen.js",
-            "src/akihabara.js",
-            "src/input.js",
-            "src/debug.js",
-            "src/trigo.js",
-            "src/gbox.js",
-            "src/iphopad.js",
-            "src/toys.js",
-            "src/tile.js",
-            "src/helpers.js",
-            "src/tools.js",
-            "src/gamecycle.js",
-            "src/devices.js",
-            "src/plugins/platformer.js"
-        ]
+        src: akicore.concat( ["src/plugins/platformer.js"] )
     };
     var shmup = {
-        src: [
-            "node_modules/jsource/dist/MediaBox.js",
-            "node_modules/gamed/dist/GameState.js",
-            "node_modules/gamed/dist/GameQuest.js",
-            "node_modules/gamed/dist/GameScreen.js",
-            "src/includes/mediabox.js",
-            "src/includes/gamestate.js",
-            "src/includes/gamequest.js",
-            "src/includes/gamescreen.js",
-            "src/akihabara.js",
-            "src/input.js",
-            "src/debug.js",
-            "src/trigo.js",
-            "src/gbox.js",
-            "src/iphopad.js",
-            "src/toys.js",
-            "src/tile.js",
-            "src/helpers.js",
-            "src/tools.js",
-            "src/gamecycle.js",
-            "src/devices.js",
-            "src/plugins/shmup.js"
-        ]
+        src: akicore.concat( ["src/plugins/shmup.js"] )
     };
     
     
