@@ -246,12 +246,10 @@ window.Tween = Tween;
 })( window );
 /*!
  *
- * Handles html5 video and audio using the audio api.
+ * Manage audio and video with playback
  *
  * @MediaBox
  * @author: kitajchuk
- * @require: Easing
- * @require: Tween
  *
  */
 (function ( window, undefined ) {
@@ -262,9 +260,10 @@ window.Tween = Tween;
 
 /**
  *
- * Manage audio and video with playback.
- * Calls MediaBox.prototype.init as constructor.
+ * Manage audio and video with playback
  * @constructor MediaBox
+ * @requires Easing
+ * @requires Tween
  * @memberof! <global>
  *
  */
@@ -274,15 +273,6 @@ var MediaBox = function () {
 
 MediaBox.prototype = {
     constructor: MediaBox,
-    
-    /**
-     *
-     * Expression match hashbang/querystring
-     * @memberof MediaBox
-     * @member MediaBox._rHashQuery
-     *
-     */
-    _rHashQuery: /[#|?].*$/g,
     
     /**
      *
@@ -322,6 +312,15 @@ MediaBox.prototype = {
     
     /**
      *
+     * Expression match hashbang/querystring
+     * @memberof MediaBox
+     * @member MediaBox._rHashQuery
+     *
+     */
+    _rHashQuery: /[#|?].*$/g,
+    
+    /**
+     *
      * MediaBox init constructor method
      * @memberof MediaBox
      * @method MediaBox.init
@@ -329,17 +328,6 @@ MediaBox.prototype = {
      */
     init: function () {
         var self = this;
-        
-        /**
-         *
-         * MediaBox supports
-         * @memberof MediaBox
-         * @member MediaBox._supported
-         *
-         */
-        this._supported = {};
-        this._supported.audio = this._getAudioSupport();
-        this._supported.video = this._getVideoSupport();
         
         /**
          *
@@ -376,6 +364,33 @@ MediaBox.prototype = {
          *
          */
         this._audioPaused = false;
+        
+        /**
+         *
+         * MediaBox supports
+         * @memberof MediaBox
+         * @member MediaBox._supported
+         *
+         */
+        this._supported = {};
+        
+        /**
+         *
+         * MediaBox supported audio
+         * @memberof MediaBox
+         * @member MediaBox._supported.audio
+         *
+         */
+        this._supported.audio = this._getAudioSupport();
+        
+        /**
+         *
+         * MediaBox supported video
+         * @memberof MediaBox
+         * @member MediaBox._supported.video
+         *
+         */
+        this._supported.video = this._getVideoSupport();
     },
     
     /**
@@ -1205,24 +1220,6 @@ GameState.prototype = {
     
     /**
      *
-     * GameState Flag whether to save to localStorage
-     * @memberof GameState
-     * @member GameState._doSaveState
-     *
-     */
-    _doSaveState: true,
-    
-    /**
-     *
-     * GameState state object internal
-     * @memberof GameState
-     * @member GameState._state
-     *
-     */
-    _state: {},
-    
-    /**
-     *
      * GameState init constructor method
      * @memberof GameState
      * @method GameState.init
@@ -1232,6 +1229,22 @@ GameState.prototype = {
     init: function ( state ) {
         state = (state || {});
         
+        /**
+         *
+         * GameState Flag whether to save to localStorage
+         * @memberof GameState
+         * @member GameState._doSaveState
+         *
+         */
+        this._doSaveState = true;
+        
+        /**
+         *
+         * GameState state object internal
+         * @memberof GameState
+         * @member GameState._state
+         *
+         */
         this._state = (this._loadState() || state);
         
         this._saveState();
@@ -1450,24 +1463,6 @@ GameQuest.prototype = {
     
     /**
      *
-     * GameQuest Flag whether to save to localStorage
-     * @memberof GameQuest
-     * @member GameQuest._doSaveQuests
-     *
-     */
-    _doSaveQuests: true,
-    
-    /**
-     *
-     * GameQuest quests object internal
-     * @memberof GameQuest
-     * @member GameQuest._quests
-     *
-     */
-    _quests: {},
-    
-    /**
-     *
      * GameQuest init constructor method
      * @memberof GameQuest
      * @method GameQuest.init
@@ -1477,6 +1472,22 @@ GameQuest.prototype = {
     init: function ( quests ) {
         quests = (quests || {});
         
+        /**
+         *
+         * GameQuest Flag whether to save to localStorage
+         * @memberof GameQuest
+         * @member GameQuest._doSaveQuests
+         *
+         */
+        this._doSaveQuests = true;
+        
+        /**
+         *
+         * GameQuest quests object internal
+         * @memberof GameQuest
+         * @member GameQuest._quests
+         *
+         */
         this._quests = (this._loadQuests() || quests);
         
         this._saveQuests();
@@ -1672,14 +1683,6 @@ var GameScreen = function () {
 GameScreen.prototype = {
     constructor: GameScreen,
     
-    /**
-     *
-     * GameScreen screens object internal
-     * @memberof GameQuest
-     * @member GameQuest._screens
-     *
-     */
-    _screens: {},
     
     /**
      *
@@ -1690,6 +1693,13 @@ GameScreen.prototype = {
      *
      */
     init: function ( screens ) {
+        /**
+         *
+         * GameScreen screens object internal
+         * @memberof GameQuest
+         * @member GameQuest._screens
+         *
+         */
         this._screens = (screens || this._screens);
     },
     
@@ -1894,10 +1904,8 @@ window.GameScreen = GameScreen;
     var AkihabaraGamestate = function () {};
     
     AkihabaraGamestate.prototype = new GameState();
-    AkihabaraGamestate.storageKey = GameState.storageKey;
     
     window.AkihabaraGamestate = new AkihabaraGamestate();
-    window.AkihabaraGamestate.storageKey = GameState.storageKey;
 
 
 })( window.GameState );
@@ -1917,10 +1925,8 @@ window.GameScreen = GameScreen;
     var AkihabaraGamequest = function () {};
     
     AkihabaraGamequest.prototype = new GameQuest();
-    AkihabaraGamequest.storageKey = GameQuest.storageKey;
     
     window.AkihabaraGamequest = new AkihabaraGamequest();
-    window.AkihabaraGamequest.storageKey = GameQuest.storageKey;
 
 
 })( window.GameQuest );

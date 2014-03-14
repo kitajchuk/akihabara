@@ -1,7 +1,7 @@
 {
     "name": "akihabara",
     "description": "A retro gaming engine using Javascript Canvas.",
-    "version": "2.0.11",
+    "version": "2.0.12",
     "homepage": "https://github.com/kitajchuk/akihabara",
     "readmeFilename": "README.md",
     "author": {
@@ -42,6 +42,8 @@
         "html5",
         "javascript",
         "gaming",
-        "8bit"
+        "8bit",
+        "retro",
+        "games"
     ]
 }

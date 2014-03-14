@@ -53,8 +53,8 @@ module.exports = function ( grunt ) {
             " * \n"+
             " * \n"+
             " * Akihabara - v<%= meta.version %> - <%= grunt.template.today('yyyy-mm-dd') %>\n"+
-            " * Copyright (c) 2010 Francesco Cottone, http://www.kesiev.com/"+
-            " * Copyright (c) <%= grunt.template.today('yyyy') %> Brandon Lee Kitajchuk\n"+
+            " * Copyright (c) 2010 Francesco Cottone, http://www.kesiev.com\n"+
+            " * Copyright (c) <%= grunt.template.today('yyyy') %> Brandon Lee Kitajchuk, http://blkpdx.com\n"+
             " * Licensed MIT\n"+
             " * \n"+
             " * \n"+
