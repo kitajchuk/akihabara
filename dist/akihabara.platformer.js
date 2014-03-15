@@ -1197,17 +1197,17 @@ var localStorage = window.localStorage,
         return this.init.apply( this, arguments );
     };
 
-/**
- *
- * GameState Storage key index
- * @memberof GameState
- * @member GameState.storageKey
- *
- */
-GameState.storageKey = "_gamestate_";
-
 GameState.prototype = {
     constructor: GameState,
+    
+    /**
+     *
+     * GameState Storage key index
+     * @memberof GameState
+     * @member GameState._storageKey
+     *
+     */
+    _storageKey: "_gamestate_",
     
     /**
      *
@@ -1262,7 +1262,7 @@ GameState.prototype = {
         
         try {
             if ( this._doSaveState ) {
-                result = JSON.parse( localStorage.getItem( GameState.storageKey ) );
+                result = JSON.parse( localStorage.getItem( GameState._storageKey ) );
             }
             
         } catch ( error ) {}
@@ -1286,7 +1286,7 @@ GameState.prototype = {
          */
         try {
             if ( this._doSaveState ) {
-                localStorage.setItem( GameState.storageKey, JSON.stringify( this.getState() ) );
+                localStorage.setItem( GameState._storageKey, JSON.stringify( this.getState() ) );
             }
             
         } catch ( error ) {}
@@ -1449,17 +1449,17 @@ var localStorage = window.localStorage,
         return this.init.apply( this, arguments );
     };
 
-/**
- *
- * GameQuest Storage key index
- * @memberof GameQuest
- * @member GameQuest.storageKey
- *
- */
-GameQuest.storageKey = "_gamequest_";
-
 GameQuest.prototype = {
     constructor: GameQuest,
+    
+    /**
+     *
+     * GameQuest Storage key index
+     * @memberof GameQuest
+     * @member GameQuest._storageKey
+     *
+     */
+    _storageKey: "_gamequest_", 
     
     /**
      *
@@ -1505,7 +1505,7 @@ GameQuest.prototype = {
         
         try {
             if ( this._doSaveQuests ) {
-                result = JSON.parse( localStorage.getItem( GameQuest.storageKey ) );
+                result = JSON.parse( localStorage.getItem( GameQuest._storageKey ) );
             }
             
         } catch ( error ) {}
@@ -1529,7 +1529,7 @@ GameQuest.prototype = {
          */
         try {
             if ( this._doSaveQuests ) {
-                localStorage.setItem( GameQuest.storageKey, JSON.stringify( this.getQuests() ) );
+                localStorage.setItem( GameQuest._storageKey, JSON.stringify( this.getQuests() ) );
             }
             
         } catch ( error ) {}
@@ -1700,7 +1700,7 @@ GameScreen.prototype = {
          * @member GameQuest._screens
          *
          */
-        this._screens = (screens || this._screens);
+        this._screens = (screens || {});
     },
     
     /**
