@@ -1262,7 +1262,7 @@ GameState.prototype = {
         
         try {
             if ( this._doSaveState ) {
-                result = JSON.parse( localStorage.getItem( GameState._storageKey ) );
+                result = JSON.parse( localStorage.getItem( this._storageKey ) );
             }
             
         } catch ( error ) {}
@@ -1286,7 +1286,7 @@ GameState.prototype = {
          */
         try {
             if ( this._doSaveState ) {
-                localStorage.setItem( GameState._storageKey, JSON.stringify( this.getState() ) );
+                localStorage.setItem( this._storageKey, JSON.stringify( this.getState() ) );
             }
             
         } catch ( error ) {}
@@ -1505,7 +1505,7 @@ GameQuest.prototype = {
         
         try {
             if ( this._doSaveQuests ) {
-                result = JSON.parse( localStorage.getItem( GameQuest._storageKey ) );
+                result = JSON.parse( localStorage.getItem( this._storageKey ) );
             }
             
         } catch ( error ) {}
@@ -1529,7 +1529,7 @@ GameQuest.prototype = {
          */
         try {
             if ( this._doSaveQuests ) {
-                localStorage.setItem( GameQuest._storageKey, JSON.stringify( this.getQuests() ) );
+                localStorage.setItem( this._storageKey, JSON.stringify( this.getQuests() ) );
             }
             
         } catch ( error ) {}
