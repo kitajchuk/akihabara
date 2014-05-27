@@ -7,7 +7,7 @@
      * https://github.com/kitajchuk/gamed/blob/master/src/GameScreen.js
      * @constructor AkihabaraGamescreen
      * @augments GameScreen
-     * @see {@link GameQuest}
+     * @see {@link GameScreen}
      * @author kitajchuk
      *
      */

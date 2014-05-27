@@ -7,6 +7,7 @@ module.exports = function ( grunt ) {
     
     
     var akicore = [
+        "banner.js",
         "node_modules/jsource/dist/MediaBox.js",
         "node_modules/gamed/dist/GameState.js",
         "node_modules/gamed/dist/GameQuest.js",
@@ -43,23 +44,8 @@ module.exports = function ( grunt ) {
     grunt.initConfig({
         // Project meta.
         meta: {
-            version: "2.0.0"
+            version: "2.0.15"
         },
-        
-        
-        // Project banner.
-        banner:
-            "/*!\n"+
-            " * \n"+
-            " * \n"+
-            " * Akihabara - v<%= meta.version %> - <%= grunt.template.today('yyyy-mm-dd') %>\n"+
-            " * Copyright (c) 2010 Francesco Cottone, http://www.kesiev.com\n"+
-            " * Copyright (c) <%= grunt.template.today('yyyy') %> Brandon Lee Kitajchuk, http://blkpdx.com\n"+
-            " * Licensed MIT\n"+
-            " * \n"+
-            " * \n"+
-            " */\n"+
-            "\n",
         
         
         // Concat config.
@@ -136,6 +122,13 @@ module.exports = function ( grunt ) {
     
     // Register default task.
     grunt.registerTask( "default", ["jshint:akihabara", "clean", "concat", "uglify"] );
+    
+    
+    // Register jsdoc task.
+    grunt.registerTask( "jsdoc", function () {
+        var spawn = require( "child_process" ).spawn,
+            child = spawn( "node_modules/jsdoc/jsdoc", ["-r", "src", "-d", "docs"] );
+    });
     
     
 };
