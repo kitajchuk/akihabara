@@ -18,13 +18,13 @@ I have implemented several new aspects of the framework. I have been building a 
 I have included an AkihabaraMediabox instance of [MediaBox](https://github.com/ProperJS/MediaBox) from my [ProperJS](https://github.com/ProperJS) organization. AkihabaraMediabox extends MediaBox, addings some new methods more specific to the gaming engine.
 
 ### AkihabaraGamestate
-I have included an AkihabaraGamestate instance of [GameState](https://github.com/ProperJS/GameState) from my [Gamed](https://github.com/ProperJS) organization.
+I have included an AkihabaraGamestate instance of [GameState](https://github.com/ProperJS/GameState) from my [ProperJS](https://github.com/ProperJS) organization.
 
 ### AkihabaraGamequest
-I have included an AkihabaraGamequest instance of [GameQuest](https://github.com/ProperJS/GameQuest) from my [Gamed](https://github.com/ProperJS) organization.
+I have included an AkihabaraGamequest instance of [GameQuest](https://github.com/ProperJS/GameQuest) from my [ProperJS](https://github.com/ProperJS) organization.
 
 ### AkihabaraGamescreen
-I have included an AkihabaraGamescreen instance of [GameScreen](https://github.com/ProperJS/GameScreen) from my [Gamed](https://github.com/ProperJS) organization.
+I have included an AkihabaraGamescreen instance of [GameScreen](https://github.com/ProperJS/GameScreen) from my [ProperJS](https://github.com/ProperJS) organization.
 
 ### Akihabara Dist Files
 You can load any of the files from the dist directory depending on what type of game you are making. The following dist files exist:
