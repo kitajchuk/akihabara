@@ -8,10 +8,10 @@ module.exports = function ( grunt ) {
     
     var akicore = [
         "banner.js",
-        "node_modules/jsource/dist/MediaBox.js",
-        "node_modules/gamed/dist/GameState.js",
-        "node_modules/gamed/dist/GameQuest.js",
-        "node_modules/gamed/dist/GameScreen.js",
+        "node_modules/properjs/node_modules/properjs-mediabox/dist/MediaBox.js",
+        "node_modules/properjs/node_modules/properjs-gamestate/GameState.js",
+        "node_modules/properjs/node_modules/properjs-gamequest/GameQuest.js",
+        "node_modules/properjs/node_modules/properjs-gamescreen/GameScreen.js",
         "src/includes/mediabox.js",
         "src/includes/gamestate.js",
         "src/includes/gamequest.js",

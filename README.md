@@ -15,16 +15,16 @@ npm install akihabara
 I have implemented several new aspects of the framework. I have been building a game using Akihabara, hence this forked version and all the updates. 
 
 ### AkihabaraMediabox
-I have included an AkihabaraMediabox instance of [MediaBox](https://github.com/kitajchuk/jsource/blob/master/src/MediaBox.js) from my [JSource](https://github.com/kitajchuk/jsource/) repository. AkihabaraMediabox extends MediaBox, addings some new methods more specific to the gaming engine.
+I have included an AkihabaraMediabox instance of [MediaBox](https://github.com/ProperJS/MediaBox) from my [ProperJS](https://github.com/ProperJS) organization. AkihabaraMediabox extends MediaBox, addings some new methods more specific to the gaming engine.
 
 ### AkihabaraGamestate
-I have included an AkihabaraGamestate instance of [GameState](https://github.com/kitajchuk/gamed/blob/master/src/GameState.js) from my [Gamed](https://github.com/kitajchuk/gamed/) repository.
+I have included an AkihabaraGamestate instance of [GameState](https://github.com/ProperJS/GameState) from my [Gamed](https://github.com/ProperJS) organization.
 
 ### AkihabaraGamequest
-I have included an AkihabaraGamequest instance of [GameQuest](https://github.com/kitajchuk/gamed/blob/master/src/GameQuest.js) from my [Gamed](https://github.com/kitajchuk/gamed/) repository.
+I have included an AkihabaraGamequest instance of [GameQuest](https://github.com/ProperJS/GameQuest) from my [Gamed](https://github.com/ProperJS) organization.
 
 ### AkihabaraGamescreen
-I have included an AkihabaraGamescreen instance of [GameScreen](https://github.com/kitajchuk/gamed/blob/master/src/GameScreen.js) from my [Gamed](https://github.com/kitajchuk/gamed/) repository.
+I have included an AkihabaraGamescreen instance of [GameScreen](https://github.com/ProperJS/GameScreen) from my [Gamed](https://github.com/ProperJS) organization.
 
 ### Akihabara Dist Files
 You can load any of the files from the dist directory depending on what type of game you are making. The following dist files exist:
