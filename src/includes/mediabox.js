@@ -16,7 +16,7 @@
      *
      */
     MediaBox.prototype.blitVideo = function ( id, cx, x, y, w, h, cb ) {
-        var videoEl = this.getVideo( id ),
+        var videoEl = this.getVideo( id ).element,
             timeout = null,
             self = this;
 
